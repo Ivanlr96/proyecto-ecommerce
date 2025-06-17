@@ -17,7 +17,7 @@
     {
       "id": 2,
       "name": "Woman",
-      "subcategories": 
+      "subcategories": [
         {
           "id": 201,
           "name": "Vestidos"
@@ -26,13 +26,26 @@
           "id": 202,
           "name": "Faldas"
         }
-      
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Accessories",
+      "subcategories": [
+        {
+          "id": 301,
+          "name": "Bolsos"
+        },
+        {
+          "id": 302,
+          "name": "Gorras"
+        }
+      ]
     }
-
   ],
   "products": [
     {
-      "id": 1,
+      "id": 89,
       "image": "https://i.imgur.com/QkIa5tT.jpeg",
       "name": "Majestic Mountain Graphic T-Shirt",
       "categoryId": 1,
