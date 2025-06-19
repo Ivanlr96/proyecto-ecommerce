@@ -7,7 +7,44 @@
   <link rel="stylesheet" href="/styles/admin.css">
 </head>
 <body>
+<div class="modal-container">
+        <button type="button" id="openModal" class="openModal">Abrir modal</button>
+        <dialog id="modalProduct" class="modal">
+            <h2>Crear modal</h2>
+            <form>
+                <label for="product-id">ID del producto</label>
+                <input id="product-id" />
 
+                <label for="product-name">Nombre</label>
+                <input id="product-name" />
+
+                <label for="product-price">Precio</label>
+                <input type="number" id="product-price"  />
+
+                <label for="gender-select">Genero</label>
+                <select id="gender-select"> 
+                    <option value="" disabled selected>-- Seleciona un genero --</option>
+              
+                </select>
+
+                <label for="category-select">Categoría</label>
+                <select id="category-select" disabled> 
+                    <option value="" disabled selected>-- Por favor selecciona un género primero --</option>
+                </select>
+
+                <label for="image">Subir imagen:</label>
+                <input type="file" id="image" accept="image/png, image/jpeg" />
+
+                <label for="text">Texto</label>
+                <textarea id="text"></textarea>
+                <div class="modal-actions">
+                    <button type="submit" id="create">Crear</button>
+                    <button type="button" id="cancel">Cancelar</button>
+                </div>
+            </form>
+        </dialog>
+
+    </div>
   <h1>Pagina Admin</h1>
 
   <!-- Tabla de productos -->
@@ -31,4 +68,6 @@
   <!-- Vincula tu script de admin -->
   <script src="src/admin.js"></script>
 </body>
+
+
 </html>

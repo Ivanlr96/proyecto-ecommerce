@@ -6,7 +6,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
+.modal-container {
     background-color: #f4f4f9;
     display: flex;
     justify-content: left;
