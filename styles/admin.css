@@ -1,0 +1,109 @@
+/* === Reset y estilos generales === */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #c2bfbf;
+  margin: 20px;
+  color: #000000;
+}
+
+h1 {
+  text-align: center;
+  color: #2b06fd;
+}
+
+/* === Tabla === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+table thead {
+  background-color: #f0f0f0;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 12px 10px;
+  text-align: left;
+}
+
+table th {
+  font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Ajusta imágenes en la tabla */
+table img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* === Botones === */
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+/* Botón Editar */
+.edit-btn {
+  background-color: #28a745; /* Verde */
+}
+
+.edit-btn:hover {
+  background-color: #218838;
+}
+
+/* Botón Eliminar */
+.delete-btn {
+  background-color: #dc3545; /* Rojo */
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* === Responsive (opcional) === */
+@media (max-width: 768px) {
+  table th, table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  button {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+/* === Columna de imagen más ancha en pantallas medianas y grandes === */
+/* Mobile First: por defecto ancho flexible */
+#products-table th:nth-child(2),
+#products-table td:nth-child(2) {
+  width: auto;
+}
+
+/* En pantallas más grandes, ancho fijo para imagen */
+@media (min-width: 768px) {
+  #products-table th:nth-child(2),
+  #products-table td:nth-child(2) {
+    width: 180px;
+  }
+}
