@@ -26,14 +26,12 @@ async function renderProducts() {
     // Recorrer el objeto de producst con el forEach 
     products.forEach(product => {
       // Buscar en el objeto categorías la coincidencia de la id de esa categoría entre su objeto y el de productos
-      const category = categories.find(cat => cat.id === product.categoryId);
+      const category = categories.find(cat => Number(cat.id) === Number(product.categoryId));
       //Operador ternario para que devuelva desconocida si no se encuentra
       const categoryName = category ? category.name : "Desconocida";
 
       //Realizar lo mismo para subcategoría
-      const subcategory = category?.subcategories.find(
-        sub => sub.id === product.subcategoryId
-      );
+       const subcategory = category?.subcategories.find(sub => Number(sub.id) === Number(product.subcategoryId));
       const subcategoryName = subcategory ? subcategory.name : "Desconocida";
 
       // Crear el elemento tr (fila) para reenderizar en la tabla y lo asignamos a la variable row
