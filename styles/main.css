@@ -81,9 +81,89 @@ button:hover {
     height: auto;
   }
 
-  /*menu
-  list-style: none;*/
+  /*menu*/
+#side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 100vh;
+    background-color: rgb(251, 251, 247);
+    color: rgb(17, 17, 17);
+    padding: 32px 24px;
+    overflow-y: auto;
+    z-index: 9999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  }
   
+  #side-menu.visible {
+    transform: translateX(0);
+  }
+  
+  #close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: rgb(17, 17, 17);
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  .gender-tabs {
+    display: flex;
+    gap: 12px;
+    margin-top: 60px;
+  }
+  
+  .gender-tabs .tab {
+    background-color: transparent;
+    color: rgb(17, 17, 17);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+  }
+  
+  .gender-tabs .tab.active {
+    color: rgb(17, 17, 17);
+    font-weight: 600;
+  }
+  
+  /* Categorías */
+  .categories {
+    margin-top: 24px;
+    display: none;
+  }
+
+  .categories.active {
+    display: block;
+  }
+  
+  .categories ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .categories li {
+    margin-bottom: 12px;
+  }
+  
+  .categories a {
+    color: rgb(17, 17, 17);
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.2s;
+  }
+  
+  .categories a:hover {
+    text-decoration: none;
+    color:rgb(51, 51, 51);
+  }
 
   /* Contenido */
 
