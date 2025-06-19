@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./modal.css">
 </head>
 <body>
-        <button type="button" id="openModal">Abrir modal</button>
-        <dialog id="modalProduct">
+        <button type="button" id="openModal" class="openModal">Abrir modal</button>
+        <dialog id="modalProduct" class="modal">
             <h2>Crear modal</h2>
             <form>
                 <label for="product-id">ID del producto</label>
@@ -36,17 +37,15 @@
 
                 <label for="text">Texto</label>
                 <textarea id="text"></textarea>
-
-                <label for="create">Crear</label>
-                <button type="submit" id="create">Crear</button>
-
-                <label for="cancel">Cancelar</label>
-                <button type="button">Cancelar</button>
-
+                <div class="modal-actions">
+                    <button type="submit" id="create">Crear</button>
+                    <button type="button" id="cancel">Cancelar</button>
+                </div>
             </form>
         </dialog>
 
 
 
 </body>
+<script src="./src/modal.js"></script>
 </html>
