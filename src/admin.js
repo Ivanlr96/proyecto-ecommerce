@@ -47,7 +47,7 @@ async function renderProducts() {
         <td>$${product.price}</td>
         <td>
           <button class="edit-btn">Edit</button>
-          <button class="delete-btn">Delete</button>
+          <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
         </td>
       `;
       //Asignamos la fila creada al cuerpo de la tabla
@@ -57,6 +57,24 @@ async function renderProducts() {
     // Establecemos el mensaje de error que saldrá si no se ejecuta lo del try
   } catch (err) {
     console.error("Error fetching products or categories:", err);
+  }
+}
+
+   // Boton de Borrar
+async function deleteProduct(id) {
+  const confirmDelete = confirm("Estas seguro de querer eliminar este producto?");
+  if (!confirmDelete) // Si le dan a cancelar
+     return; // Devuelve los datos 
+
+  try {
+    await fetch(`${API_URL}/${id}`, { // Pide a la Api
+      method: "DELETE" // Eliminar el producto
+    });
+
+    renderProducts();
+
+  } catch (err) {
+    console.error("Error deleting product:", err);
   }
 }
 
