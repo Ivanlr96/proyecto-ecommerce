@@ -208,3 +208,28 @@ function toBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
+
+
+
+// DELETE
+   // Boton de Borrar
+async function deleteProduct(id) {
+  const confirmDelete = confirm("Estas seguro de querer eliminar este producto?");
+  if (!confirmDelete) // Si le dan a cancelar
+     return; // Devuelve los datos 
+
+  try {
+    await fetch(`${API_URL}/${id}`, { // Pide a la Api
+      method: "DELETE" // Eliminar el producto
+    });
+
+    renderProducts();
+
+  } catch (err) {
+    console.error("Error deleting product:", err);
+  }
+}
+
+// Ejecutar al cargar
+renderProducts();
