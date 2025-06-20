@@ -47,7 +47,7 @@ async function renderProducts() {
         <td>$${product.price}</td>
         <td>
           <button class="edit-btn">Edit</button>
-          <button class="delete-btn">Delete</button>
+         <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
         </td>
       `;
       //Asignamos la fila creada al cuerpo de la tabla
