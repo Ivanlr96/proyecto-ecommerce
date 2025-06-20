@@ -119,8 +119,8 @@ function populateGenderSelect() {
 
 // 6. Poblar subcategorías al seleccionar género
 function populateSubcategories(categoryId) {
-  categoryId = parseInt(categoryId); // Asegura que sea número
-  const selectedCategory = categories.find(cat => cat.id === categoryId);
+  categoryId = Number(categoryId); // Asegura que sea número
+  const selectedCategory = categories.find(cat => Number(cat.id) === categoryId);
 
   categorySelect.innerHTML = ""; // Limpiar
 
