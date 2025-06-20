@@ -207,19 +207,19 @@ form.addEventListener("submit", async (e) => {
       alert("Producto creado con éxito");
     } form.reset();
 
-  } catch (error) {
+    } catch (error) {
     alert("error al guardar");
     console.error(error);
   }
 
   // Reset form and close modal after submission
   form.reset();
-modal.close();
-modoEdicion = false; // Reset edit mode
-idEditando = null; // Clear editing ID
-titleForm.textContent = "Crear nuevo producto"; // Reset title
-document.getElementById("create").textContent = "Crear"; // Reset button text
-renderProducts(); // Re-render the table
+  modal.close();
+  modoEdicion = false; // Reset edit mode
+  idEditando = null; // Clear editing ID
+  titleForm.textContent = "Crear nuevo producto"; // Reset title
+  document.getElementById("create").textContent = "Crear"; // Reset button text
+  renderProducts(); // Re-render the table
 
 try {
   const res = await fetch(API_URL, {
