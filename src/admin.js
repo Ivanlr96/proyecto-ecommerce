@@ -46,6 +46,8 @@ async function renderProducts() {
         <td>${subcategoryName}</td>
         <td>$${product.price}</td>
         <td>
+          <button class="edit-btn">Edit</button>
+         <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
           <button class="edit-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out" data-id="${product.id}">Editar</button>
           <button class="delete-btn">Delete</button>
         </td>
@@ -130,8 +132,8 @@ function populateGenderSelect() {
 
 // 6. Poblar subcategorías al seleccionar género
 function populateSubcategories(categoryId) {
-  categoryId = parseInt(categoryId); // Asegura que sea número
-  const selectedCategory = categories.find(cat => cat.id === categoryId);
+  categoryId = Number(categoryId); // Asegura que sea número
+  const selectedCategory = categories.find(cat => Number(cat.id) === categoryId);
 
   categorySelect.innerHTML = ""; // Limpiar
 
@@ -370,3 +372,29 @@ async function cargarProductoEnFormulario(id) {
 
 
 
+
+
+
+
+
+// DELETE
+   // Boton de Borrar
+async function deleteProduct(id) {
+  const confirmDelete = confirm("Estas seguro de querer eliminar este producto?");
+  if (!confirmDelete) // Si le dan a cancelar
+     return; // Devuelve los datos 
+
+  try {
+    await fetch(`${API_URL}/${id}`, { // Pide a la Api
+      method: "DELETE" // Eliminar el producto
+    });
+
+    renderProducts();
+
+  } catch (err) {
+    console.error("Error deleting product:", err);
+  }
+}
+
+// Ejecutar al cargar
+renderProducts();

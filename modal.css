@@ -6,14 +6,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.modal-container {
-    background-color: #f4f4f9;
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    margin-left: 10px;
-  
-}
 
 /* Button to open modal */
 .openModal {
