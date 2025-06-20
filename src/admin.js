@@ -188,54 +188,59 @@ form.addEventListener("submit", async (e) => {
     image: imageBase64 // Enviar como base64 o URL si usas Cloudinary
   };
 
+  try {
+    if (modoEdicion) {
+      // If in edit mode, include the idEditando in the URL
+      await fetch(`${API_URL}/${idEditando}`, {
+        method: "PUT", // Use PUT for updating
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct)
+      });
+      alert("Producto actualizado con éxito");
+    } else {
+      // If not in edit mode, create a new product
+      await fetch(API_URL, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct)
+      });
+      alert("Producto creado con éxito");
+    } form.reset();
 
-  if (modoEdicion) {
-    // If in edit mode, include the idEditando in the URL
-    await fetch(`<span class="math-inline">\{API\_URL\}/</span>{idEditando}`, {
-      method: "PUT", // Use PUT for updating
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newProduct)
-    });
-    alert("Producto actualizado con éxito");
-  } else {
-    // If not in edit mode, create a new product
-    await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newProduct)
-    });
-    alert("Producto creado con éxito");
+  } catch (error) {
+    alert("error al guardar");
+    console.error(error);
   }
 
   // Reset form and close modal after submission
   form.reset();
-  modal.close();
-  modoEdicion = false; // Reset edit mode
-  idEditando = null; // Clear editing ID
-  titleForm.textContent = "Crear nuevo producto"; // Reset title
-  document.getElementById("create").textContent = "Crear"; // Reset button text
-  renderProducts(); // Re-render the table
+modal.close();
+modoEdicion = false; // Reset edit mode
+idEditando = null; // Clear editing ID
+titleForm.textContent = "Crear nuevo producto"; // Reset title
+document.getElementById("create").textContent = "Crear"; // Reset button text
+renderProducts(); // Re-render the table
 
-  try {
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newProduct)
-    });
+try {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newProduct)
+  });
 
-    if (res.ok) {
-      alert("Producto creado con éxito");
-      form.reset();
-      modal.close();
-    } else {
-      throw new Error("Error al crear producto");
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Error al enviar el producto");
+  if (res.ok) {
+    alert("Producto creado con éxito");
+    form.reset();
+    modal.close();
+  } else {
+    throw new Error("Error al crear producto");
   }
+} catch (err) {
+  console.error(err);
+  alert("Error al enviar el producto");
+}
 });
 
 // Función para convertir imagen a base64
