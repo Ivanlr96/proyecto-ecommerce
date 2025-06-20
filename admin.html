@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HTML Página Admin</title>
   <link rel="stylesheet" href="/styles/admin.css">
 </head>
-
 <body>
-<div class="modal-container">
-        <button type="button" id="openModal" class="openModal">Abrir modal</button>
-        <dialog id="modalProduct" class="modal">
-            <h2 id="titleForm">Crear modal</h2>
-            <form>
-                <label for="product-id">ID del producto</label>
-                <input id="product-id" />
-
     <h1>Página Admin</h1>
-
   <div class="modal-container">
   <div class="button-container">
   <button type="button" id="openModal" class="openModal">Crear Producto</button>
@@ -28,27 +17,20 @@
     <form>
       <label for="product-id">ID del producto</label>
       <input id="product-id" />
-
       <label for="product-name">Nombre</label>
       <input id="product-name" />
-
       <label for="product-price">Precio</label>
       <input type="number" id="product-price" />
-
       <label for="gender-select">Genero</label>
       <select id="gender-select">
         <option value="" disabled selected>-- Seleciona un genero --</option>
-
       </select>
-
       <label for="category-select">Categoría</label>
       <select id="category-select" disabled>
         <option value="" disabled selected>-- Por favor selecciona un género primero --</option>
       </select>
-
       <label for="image">Subir imagen:</label>
       <input type="file" id="image" accept="image/png, image/jpeg" />
-
       <label for="text">Texto</label>
       <textarea id="text"></textarea>
       <div class="modal-actions">
@@ -57,10 +39,7 @@
       </div>
     </form>
   </dialog>
-
   </div>
-
-
   <!-- Tabla de productos -->
   <table id="products-table">
     <thead>
@@ -78,10 +57,7 @@
       <!-- Espacio JavaScript-->
     </tbody>
   </table>
-
   <!-- Vincula tu script de admin -->
   <script src="src/admin.js"></script>
 </body>
-
-
 </html>

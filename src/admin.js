@@ -46,10 +46,9 @@ async function renderProducts() {
         <td>${subcategoryName}</td>
         <td>$${product.price}</td>
         <td>
-          <button class="edit-btn">Edit</button>
-         <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
           <button class="edit-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out" data-id="${product.id}">Editar</button>
-          <button class="delete-btn">Delete</button>
+         <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
+        
         </td>
       `;
       //Asignamos la fila creada al cuerpo de la tabla
