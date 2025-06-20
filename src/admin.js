@@ -31,7 +31,7 @@ async function renderProducts() {
       const categoryName = category ? category.name : "Desconocida";
 
       //Realizar lo mismo para subcategoría
-       const subcategory = category?.subcategories.find(sub => Number(sub.id) === Number(product.subcategoryId));
+      const subcategory = category?.subcategories.find(sub => Number(sub.id) === Number(product.subcategoryId));
       const subcategoryName = subcategory ? subcategory.name : "Desconocida";
 
       // Crear el elemento tr (fila) para reenderizar en la tabla y lo asignamos a la variable row
@@ -46,12 +46,22 @@ async function renderProducts() {
         <td>${subcategoryName}</td>
         <td>$${product.price}</td>
         <td>
-          <button class="edit-btn">Edit</button>
+          <button class="edit-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out" data-id="${product.id}">Editar</button>
           <button class="delete-btn">Delete</button>
         </td>
       `;
       //Asignamos la fila creada al cuerpo de la tabla
       tableBody.appendChild(row);
+    });
+
+    // Boton para editar el modal
+    tableBody.addEventListener("click", (event) => {
+      // Check if the clicked element has the 'edit-btn' class
+      if (event.target.classList.contains("edit-btn")) {
+        const productId = event.target.dataset.id; // Get the product ID from the data-id attribute
+        cargarProductoEnFormulario(productId);
+        modal.showModal(); // Assuming you want to open the modal for editing
+      }
     });
 
     // Establecemos el mensaje de error que saldrá si no se ejecuta lo del try
@@ -71,6 +81,7 @@ const cancelBtn = document.getElementById("cancel");
 
 const genderSelect = document.getElementById("gender-select");
 const categorySelect = document.getElementById("category-select");
+
 
 
 let categories = [];
@@ -177,6 +188,34 @@ form.addEventListener("submit", async (e) => {
     image: imageBase64 // Enviar como base64 o URL si usas Cloudinary
   };
 
+
+  if (modoEdicion) {
+    // If in edit mode, include the idEditando in the URL
+    await fetch(`<span class="math-inline">\{API\_URL\}/</span>{idEditando}`, {
+      method: "PUT", // Use PUT for updating
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newProduct)
+    });
+    alert("Producto actualizado con éxito");
+  } else {
+    // If not in edit mode, create a new product
+    await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newProduct)
+    });
+    alert("Producto creado con éxito");
+  }
+
+  // Reset form and close modal after submission
+  form.reset();
+  modal.close();
+  modoEdicion = false; // Reset edit mode
+  idEditando = null; // Clear editing ID
+  titleForm.textContent = "Crear nuevo producto"; // Reset title
+  document.getElementById("create").textContent = "Crear"; // Reset button text
+  renderProducts(); // Re-render the table
+
   try {
     const res = await fetch(API_URL, {
       method: "POST",
@@ -208,3 +247,121 @@ function toBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let modoEdicion = false;
+let idEditando = null;
+const titleForm = document.getElementById("titleForm");
+
+//cargar para editarlo
+async function cargarProductoEnFormulario(id) {
+  try {
+    const res = await fetch(`${API_URL}/${id}`);
+    const product = await res.json();
+
+    document.getElementById("product-id").value = product.id; // Assuming you have an ID input field
+    document.getElementById("product-name").value = product.name;
+    document.getElementById("product-price").value = product.price;
+    document.getElementById("text").value = product.description;
+
+    // Handle category and subcategory selects for editing
+    await fetchCategories(); // Ensure categories are loaded
+    genderSelect.value = product.categoryId;
+    populateSubcategories(product.categoryId); // Populate subcategories based on selected category
+    // Delay setting subcategory value slightly to ensure options are rendered
+    setTimeout(() => {
+      categorySelect.value = product.subcategoryId;
+    }, 100);
+
+
+    modoEdicion = true;
+    idEditando = id;
+    titleForm.textContent = "Editar producto";
+  } catch (error) {
+    alert("error al cargar el producto");
+    console.error(error);
+  }
+}
+
+
+
+
+
+

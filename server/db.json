@@ -40,7 +40,7 @@
       "description": "Elevate your wardrobe with this stylish black t-shirt featuring a striking monochrome mountain range graphic. Perfect for those who love the outdoors or want to add a touch of nature-inspired design to their look, this tee is crafted from soft, breathable fabric ensuring all-day comfort. Ideal for casual outings or as a unique gift, this t-shirt is a versatile addition to any collection."
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Camiseta",
       "price": 44,
       "categoryId": 1,
