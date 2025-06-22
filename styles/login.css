@@ -1,0 +1,75 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.page-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.left-side {
+  flex: 1;
+  background: #f0f0f0; /* Color claro de ejemplo */
+}
+
+.right-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logo {
+  width: 40px;
+  height: 20px;
+  max-width: 50%;
+  display: block;
+  margin: 0 auto 30px auto;
+}
+
+h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background-color: #000 !important;
+  border: none !important;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 12px 0;
+}
+
+.btn-primary:hover {
+  background-color: #000000 !important;
+}
+
+.btn-outline-dark {
+  border: 1px solid #000;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 12px 0;
+}
+
+.btn-outline-dark:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+a {
+  display: block;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
