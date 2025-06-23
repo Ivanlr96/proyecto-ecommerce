@@ -1,4 +1,10 @@
 
+// Comprobación sesión de usuario
+const user = JSON.parse(localStorage.getItem("user"));
+if (!user || user.role !== "admin") {
+  alert("Acceso denegado");
+  window.location.href = "login.html";
+}
 // Guardar las rutas de la base de datos en variables para la llamada a la bd (API)
 const API_URL = "http://localhost:3000/products";
 const API_URL2 = "http://localhost:3000/categories";
