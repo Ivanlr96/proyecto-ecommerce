@@ -47,7 +47,7 @@ async function renderProducts() {
         <td>$${product.price}</td>
         <td>
           <button class="edit-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out" data-id="${product.id}">Editar</button>
-         <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
+         <button class="delete-btn" onclick="deleteProduct('${product.id}')">Delete</button>
         
         </td>
       `;
@@ -90,6 +90,9 @@ let categories = [];
 // 1. Abrir modal
 openModalBtn.addEventListener("click", () => {
   modal.showModal();
+  form.reset()
+  titleForm.textContent = "Crear Producto";
+  createBtn.textContent = "Crear"
 });
 
 // 2. Cerrar modal con botón cancelar
@@ -97,9 +100,12 @@ cancelBtn.addEventListener("click", () => {
   modal.close();
 });
 
+
+
 // 3. Cerrar modal clic fuera del contenido
 modal.addEventListener("click", (event) => {
   if (event.target === modal) {
+
     modal.close();
   }
 });
@@ -167,7 +173,8 @@ const form = document.querySelector("form");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const id = parseInt(document.getElementById("product-id").value);
+  //const id = parseInt(document.getElementById("product-id").value);
+  let id
   const name = document.getElementById("product-name").value;
   const price = parseFloat(document.getElementById("product-price").value);
   const categoryId = parseInt(document.getElementById("gender-select").value);
@@ -189,59 +196,39 @@ form.addEventListener("submit", async (e) => {
     image: imageBase64 // Enviar como base64 o URL si usas Cloudinary
   };
 
-  try {
+    try {
     if (modoEdicion) {
-      // If in edit mode, include the idEditando in the URL
+      // Solo actualizar producto existente
       await fetch(`${API_URL}/${idEditando}`, {
-        method: "PUT", // Use PUT for updating
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newProduct)
       });
       alert("Producto actualizado con éxito");
     } else {
-      // If not in edit mode, create a new product
-      await fetch(API_URL, {
-        method: "PUT",
+      // Solo crear producto nuevo
+      const res = await fetch(API_URL, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newProduct)
       });
-      alert("Producto creado con éxito");
-    } form.reset();
-
-    } catch (error) {
-    alert("error al guardar");
-    console.error(error);
-  }
-
-  // Reset form and close modal after submission
-  form.reset();
-  modal.close();
-  modoEdicion = false; // Reset edit mode
-  idEditando = null; // Clear editing ID
-  titleForm.textContent = "Crear nuevo producto"; // Reset title
-  document.getElementById("create").textContent = "Crear"; // Reset button text
-  renderProducts(); // Re-render the table
-
-try {
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(newProduct)
-  });
-
-  if (res.ok) {
-    alert("Producto creado con éxito");
+      if (res.ok) {
+        alert("Producto creado con éxito");
+      } else {
+        throw new Error("Error al crear producto");
+      }
+    }
     form.reset();
     modal.close();
-  } else {
-    throw new Error("Error al crear producto");
+    modoEdicion = false;
+    idEditando = null;
+    titleForm.textContent = "Crear nuevo producto";
+    document.getElementById("create").textContent = "Crear";
+    renderProducts();
+  } catch (error) {
+    alert("Error al guardar");
+    console.error(error);
   }
-} catch (err) {
-  console.error(err);
-  alert("Error al enviar el producto");
-}
 });
 
 // Función para convertir imagen a base64
@@ -342,7 +329,7 @@ async function cargarProductoEnFormulario(id) {
     const res = await fetch(`${API_URL}/${id}`);
     const product = await res.json();
 
-    document.getElementById("product-id").value = product.id; // Assuming you have an ID input field
+    id = product.id; 
     document.getElementById("product-name").value = product.name;
     document.getElementById("product-price").value = product.price;
     document.getElementById("text").value = product.description;
@@ -360,6 +347,104 @@ async function cargarProductoEnFormulario(id) {
     modoEdicion = true;
     idEditando = id;
     titleForm.textContent = "Editar producto";
+    createBtn.textContent = "Editar"
+
+  } catch (error) {
+    alert("error al cargar el producto");
+    console.error(error);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+// DELETE
+   // Boton de Borrar
+async function deleteProduct(id) {
+  const confirmDelete = confirm("Estas seguro de querer eliminar este producto?");
+  if (!confirmDelete) // Si le dan a cancelar
+     return; // Devuelve los datos 
+
+  try {
+    await fetch(`${API_URL}/${id}`, { // Pide a la Api
+      method: "DELETE" // Eliminar el producto
+    });
+
+    renderProducts();
+
+  } catch (err) {
+    console.error("Error deleting product:", err);
+  }
+}
+
+// Ejecutar al cargar
+renderProducts();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//cargar para editarlo
+async function cargarProductoEnFormulario(id) {
+  try {
+    const res = await fetch(`${API_URL}/${id}`);
+    const product = await res.json();
+
+   // document.getElementById("product-id").value = product.id; // Assuming you have an ID input field
+    id = product
+    document.getElementById("product-name").value = product.name;
+    document.getElementById("product-price").value = product.price;
+    document.getElementById("text").value = product.description;
+
+    // Handle category and subcategory selects for editing
+    await fetchCategories(); // Ensure categories are loaded
+    genderSelect.value = product.categoryId;
+    populateSubcategories(product.categoryId); // Populate subcategories based on selected category
+    // Delay setting subcategory value slightly to ensure options are rendered
+    setTimeout(() => {
+      categorySelect.value = product.subcategoryId;
+    }, 100);
+
+
+    modoEdicion = true;
+    idEditando = id;
+    titleForm.textContent = "Editar producto";
+    createBtn.textContent = "Editar"
   } catch (error) {
     alert("error al cargar el producto");
     console.error(error);
