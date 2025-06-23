@@ -442,7 +442,7 @@ async function cargarProductoEnFormulario(id) {
 
 
     modoEdicion = true;
-    idEditando = id;
+    idEditando = product.id;
     titleForm.textContent = "Editar producto";
     createBtn.textContent = "Editar"
   } catch (error) {
