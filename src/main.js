@@ -50,7 +50,8 @@ tabButtons.forEach((button) => {
       const targetId = button.getAttribute("data-target");      
       
       tabButtons.forEach((btn) => btn.classList.remove("active"));     
-      button.classList.add("active");      
+      button.classList.add("active");  
+
       categories.forEach((cat) => {       
         if (cat.id === targetId) {         
           cat.classList.remove("hidden");         
@@ -62,3 +63,55 @@ tabButtons.forEach((button) => {
       });   
     }); 
   }); 
+
+  // Carrito: Cargar categorias dinamicamente desde la Api
+
+  const categoriesWoman = document.querySelector("#woman ul");
+const categoriesMan = document.querySelector("#man ul");
+
+async function loadCategories() {
+    try {
+        const response = await fetch(API_URL2);
+        if (!response.ok) {
+            throw new Error("Error al cargar categorías");
+        }
+        const data = await response.json();
+
+        // Filtra categorías por género
+        const womanCategories = data.filter(cat => cat.gender === "woman");
+        const manCategories = data.filter(cat => cat.gender === "man");
+
+        // Renderiza categorías de mujer
+        categoriesWoman.innerHTML = "";
+        womanCategories.forEach(cat => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = "#";
+            a.textContent = cat.name;
+            li.appendChild(a);
+            categoriesWoman.appendChild(li);
+        });
+
+        // Renderiza categorías de hombre
+        categoriesMan.innerHTML = "";
+        manCategories.forEach(cat => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = "#";
+            a.textContent = cat.name;
+            li.appendChild(a);
+            categoriesMan.appendChild(li);
+        });
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Ejecutar carga de categorías cuando se abre el menú por primera vez
+menuToggle.addEventListener("click", () => {
+    if (!sideMenu.classList.contains("visible")) {
+        loadCategories();
+    }
+});
+
