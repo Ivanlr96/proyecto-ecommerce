@@ -277,7 +277,7 @@ button:hover {
     scroll-snap-align: start;
 }
 
-#jacW{
+/*#jacW{
     background-image: url('/assets/fotos_mujer/chaquetas.webp');
 }
 #pulW{
@@ -315,7 +315,7 @@ button:hover {
 }
 #accM{
     background-image: url('/assets/fotos_hombre/accesorios-hombre.webp');
-}
+}*/
 
 .btn-category { 
     background-color: rgb(17, 17, 17);
