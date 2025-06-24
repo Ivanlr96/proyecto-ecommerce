@@ -1,3 +1,4 @@
+
 body {
     background-color: rgb(251, 251, 247);
     font-family: "Inter", sans-serif;
@@ -47,9 +48,8 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     padding: 16px;
-    height: 70px;
+    height: 30px;
     position: relative;
-    margin-bottom: 32px;
   }
   
   .nav-left {
@@ -253,6 +253,7 @@ button:hover {
 .cards-carousel {
     display: flex;
     flex-direction: row;
+    margin-left: 24px;
     gap: 12px; 
     overflow-x: auto;
     padding: 0 24px;
@@ -261,82 +262,44 @@ button:hover {
 }
 
 .card-category {
-    height: 355px;
-    width: 284px;
-    border-radius: 16px;
-    background-size: cover;      
-    background-position: center;  
-    background-repeat: no-repeat;  
-    position: relative;            
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 20px;
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    z-index: 1;
+  position: relative;
+  height: 355px;
+  width: 284px;
+  border-radius: 16px;  
+  overflow: hidden;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display:flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;    
 }
 
 .photo {
-  height: 355px;
-  width: 284px;
-
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover; 
+  object-position: center;
+  z-index: 1;
 }
-
-/*#jacW{
-    background-image: url('/assets/fotos_mujer/chaquetas.webp');
-}
-#pulW{
-    background-image: url('/assets/fotos_mujer/sudaderas.webp');
-}
-#tshW{
-    background-image: url('/assets/fotos_mujer/camisetas.webp');
-}
-#panW{
-    background-image: url('/assets/fotos_mujer/pantalones.webp');
-}
-#legW{
-    background-image: url('/assets/fotos_mujer/leggings.webp');
-}
-#bra{
-    background-image: url('/assets/fotos_mujer/sujetadores.webp');
-}
-#accW{
-    background-image: url('/assets/fotos_mujer/accesorios.webp');
-}
-#jacM{
-    background-image: url('/assets/fotos_hombre/chaquetas-hombre.webp');
-}
-#pulM{
-    background-image: url('/assets/fotos_hombre/sudaderas-hombre.webp');
-}
-#tshM{
-    background-image: url('/assets/fotos_hombre/camisetas-hombre.webp');
-}
-#panM{
-    background-image: url('/assets/fotos_hombre/pantalones-hombre.webp');
-}
-#legM{
-    background-image: url('/assets/fotos_hombre/leggings-hombre.webp');
-}
-#accM{
-    background-image: url('/assets/fotos_hombre/accesorios-hombre.webp');
-}*/
 
 .btn-category { 
-    background-color: rgb(17, 17, 17);
-    color:rgb(251, 251, 247);
-    border-radius: 50px;
-    border: none;
-    padding: 12px;
-    max-width: 350px;
-    min-width: 150px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 16px;
-    z-index: 2;
-}
+  position: relative;
+  z-index: 2;
+  background-color: rgb(17, 17, 17);
+  color:rgb(251, 251, 247);
+  border-radius: 50px;
+  border: none;
+  padding: 12px;
+  max-width: 350px;
+  min-width: 150px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  }
 
 .btn-category:hover {
     background-color:rgb(51, 51, 51);
