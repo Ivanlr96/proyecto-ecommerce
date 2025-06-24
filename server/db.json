@@ -6,12 +6,28 @@
       "subcategories": [
         {
           "id": 101,
-          "name": "Camisetas", 
-          "image": "./assets/fotos_hombre/camisetas-hombre.webp"
+          "name": "Chaquetas",
+          "image": "./assets/fotos_hombre/sudaderas-hombre.webp"
         },
         {
           "id": 102,
-          "name": "Pantalones"
+          "name": "Sudaderas",
+          "image": "./assets/fotos_hombre/camisetas-hombre.webp"
+        },
+        {
+          "id": 103,
+          "name": "Pantaloes",
+          "image": "./assets/fotos_hombre/pantalones-hombre.webp"
+        },
+        {
+          "id": 104,
+          "name": "Leggings",
+          "image": "./assets/fotos_hombre/leggings-hombre.webp"
+        },
+        {
+          "id": 105,
+          "name": "Accesorios",
+          "image": "./assets/fotos_hombre/accesorios-hombre.webp"
         }
       ]
     },
@@ -21,17 +37,33 @@
       "subcategories": [
         {
           "id": 201,
-          "name": "Vestidos"
+          "name": "Chaquetas",
+          "image": "./assets/fotos_mujer/sudaderas.webp"
         },
         {
           "id": 202,
-          "name": "Faldas"
+          "name": "Sudaderas",
+          "image": "./assets/fotos_mujer/camisetas.webp"
+        },
+        {
+          "id": 203,
+          "name": "Pantalones",
+          "image": "./assets/fotos_mujer/pantalones.webp"
+        },
+        {
+          "id": 204,
+          "name": "Leggings",
+          "image": "./assets/fotos_mujer/leggings.webp"
+        },
+        {
+          "id": 205,
+          "name": "Accesorios",
+          "image": "./assets/fotos_mujer/accesorios.webp"
         }
       ]
     }
   ],
   "products": [
     
-     
   ]
 }
