@@ -233,3 +233,28 @@ async function deleteProduct(id) {
 
 // Ejecutar al cargar
 renderProducts();
+
+// Función leer el carrito desde localStorage
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+// Función guardar el carrito en localStorage
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Función añade un producto al carrito
+function addToCart(item) {
+  const cart = getCart();
+  const existingItem = cart.find(product => product.id === item.id);
+
+  if (existingItem) {
+    existingItem.quantity += item.quantity;
+  } else {
+    cart.push(item);
+  }
+
+  saveCart(cart);
+  alert(`Has añadido ${item.name} al carrito.`);
+}
