@@ -1,0 +1,264 @@
+/* === Reset y estilos generales === */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #c2bfbf;
+  margin: 20px;
+  color: #000000;
+}
+
+h1 {
+  text-align: center;
+  color: #2b06fd;
+}
+
+/* === Tabla === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+table thead {
+  background-color: #f0f0f0;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 12px 10px;
+  text-align: left;
+}
+
+table th {
+  font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Ajusta imágenes en la tabla */
+table img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* === Botones === */
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+/* Botón Editar */
+.edit-btn {
+  background-color: #28a745; /* Verde */
+}
+
+.edit-btn:hover {
+  background-color: #218838;
+}
+
+/* Botón Eliminar */
+.delete-btn {
+  background-color: #dc3545; /* Rojo */
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* === Responsive (opcional) === */
+@media (max-width: 768px) {
+  table th, table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  button {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+/* === Columna de imagen más ancha en pantallas medianas y grandes === */
+/* Mobile First: por defecto ancho flexible */
+#products-table th:nth-child(2),
+#products-table td:nth-child(2) {
+  width: auto;
+}
+
+/* En pantallas más grandes, ancho fijo para imagen */
+@media (min-width: 768px) {
+  #products-table th:nth-child(2),
+  #products-table td:nth-child(2) {
+    width: 180px;
+  }
+}
+
+
+/* Base resets */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*
+.modal-container {
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin-left: 10px;
+  
+}
+*/
+
+/* Button to open modal */
+.openModal {
+
+    padding: 0.75rem 1.5rem;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.openModal:hover {
+    background-color: #4338ca;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+
+/* Modal styles */
+.modal {
+    border: none;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    animation: fadeIn 0.3s ease-out;
+}
+
+
+/* Animation creates a smooth entrance effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #111827;
+}
+
+/* Form elements */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+input,
+select,
+textarea {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+    background-color: #f9fafb;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+    background-color: #fff;
+}
+
+/* Textarea */
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Buttons */
+button[type="submit"],
+button[type="button"] {
+    padding: 0.65rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#create {
+    background-color: #10b981;
+    color: white;
+    width: 100px;
+
+}
+
+#create:hover {
+    background-color: #059669;
+}
+
+#cancel {
+    background-color: #ef4444;
+    color: white;
+    width: 100px;
+    
+}
+
+#cancel:hover {
+    background-color: #dc2626;
+}

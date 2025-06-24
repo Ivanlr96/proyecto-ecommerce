@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+    <div class="page-container">
+        <div class="left-side">
+            </div>
+        <div class="right-side">
+            <div class="login-box">
+                <img src="assets/logos/favicon-01.svg" alt="Logo Siroko" class="logo">
+                <h1>ACCEDE A TU CUENTA</h1>
+                <form action="/es/login_check" method="post">
+                    <div class="form-group">
+                        <input class="form-control-custom" type="text" id="username" name="_username" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="form-group password-field">
+                        <input class="form-control-custom" type="password" id="password" name="_password" placeholder="Contraseña" required>
+                        <button type="button" class="password-toggle-btn" data-target="#password">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.134 13.134 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.12 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="btn-custom btn-primary-custom" type="submit">INICIAR SESIÓN</button>
+                    <a href="#" class="forgot-password-link">¿Has olvidado la contraseña?</a>
+                    <p class="no-account-text">¿NO TIENES CUENTA?</p>
+                    <a href="#" class="btn-custom btn-outline-custom">REGÍSTRATE AQUÍ</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePasswordButtons = document.querySelectorAll('.password-toggle-btn');
+
+            togglePasswordButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const passwordInput = document.querySelector(targetId);
+
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        // Example: button.querySelector('svg').outerHTML = '<svg class="bi bi-eye-slash" ...>';
+                    } else {
+                        passwordInput.type = 'password';
+                        // Example: button.querySelector('svg').outerHTML = '<svg class="bi bi-eye" ...>';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

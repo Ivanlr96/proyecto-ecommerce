@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/logos/favicon-01.svg" type="image/iso-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="main.css">
+   <link rel="stylesheet" href="/styles/main.css">
     <title>SIROKO</title>
 </head>
 <body>
     <header>
-        <nav class="main-nav">
-            <button id="menu-toggle" aria-label="abrir menú">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <button class="search" aria-label="buscador">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <div class="logo-container">
-                <img src="./assets/logos/black-01.svg" alt="logotipo">
-            </div>
-            <button class="cart" aria-label="cesta">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </button>
-            <button class="profile" aria-label="perfil">
-                <i class="fa-solid fa-user"></i>
-            </button>
-        </nav>
+      <nav class="main-nav">
+        <div class="nav-left">
+          <button id="menu-toggle" aria-label="abrir menú">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <button class="search" aria-label="buscador">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      
+        <div class="logo-container">
+          <img src="./assets/logos/black-01.svg" alt="logotipo">
+        </div>
+      
+        <div class="nav-right">
+          <button class="profile" aria-label="perfil">
+            <i class="fa-solid fa-user"></i>
+          </button>
+          <button class="cart" aria-label="cesta">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </div>
+      </nav>      
     </header>
     <aside id="side-menu" class="hidden" aria-hidden="true">
         <button id="close-menu" aria-label="cerrar menú">
@@ -42,85 +49,86 @@
         <!--Subcategorías mujer-->
         <div id="woman" class="categories active">
             <ul>
-                <li><a href="">Chaquetas</a></li>
+                <!-- <li><a href="">Chaquetas</a></li>
                 <li><a href="">Sudaderas</a></li>
                 <li><a href="">Camisetas</a></li>
                 <li><a href="">Pantalones</a></li>
                 <li><a href="">Leggings</a></li>
                 <li><a href="">Sujetadores deportivos</a></li>
-                <li><a href="">Accesorios</a></li>
+                <li><a href="">Accesorios</a></li> -->
             </ul>
         </div>
         <!--Subcategorías hombre-->
-        <div id="man" class="categories hidden">
+        <div id="man" class="categories categories hidden">
             <ul>
-                <li><a href="">Chaquetas</a></li>
+                <!-- <li><a href="">Chaquetas</a></li>
                 <li><a href="">Sudaderas</a></li>
                 <li><a href="">Camisetas</a></li>
                 <li><a href="">Pantalones</a></li>
                 <li><a href="">Leggings</a></li>
-                <li><a href="">Accesorios</a></li>
+                <li><a href="">Accesorios</a></li> -->
             </ul>
         </div>
     </aside>
     <main>
         <!--Empieza la categoría de mujer-->
-        <div class="video-container">
-            <div class="text-content">
-                <h1>MUJER</h1>
-                <p>Descubre la nueva colección para entrenar con comodidad y estilo</p>
-                <button>Ver más
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>                        
-            </div>
-        </div>
+        <div class="video-container-woman">
+          <video autoplay muted loop playsinline>
+            <source src="/assets/video/video-woman.mp4" type="video/mp4" />
+          </video>
+          <div class="text-content">
+            <h1>MUJER</h1>
+            <p>Descubre la nueva colección para entrenar con comodidad y estilo</p>
+            <button class="btn-more">
+              VER MÁS <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>        
 
         <section class="cards-cartegories">
-            <section class="carousel">
+            <section class="carousel-block">
                 <div class="carousel header">
-                    <div>
-                        <h5>CATEGORÍAS</h5>
-                        <i class="fa-solid fa-circle-arrow-left"></i> <i class="fa-solid fa-circle-arrow-right"></i>
-                    </div>
+                  <h2>CATEGORÍAS</h2>
                 </div>
                 <!--Aquí va el carousel de productos de mujer-->
-                <div class="cards-carousel">
-                    <div class="card-category" id="cc1"><button class="btn-category">Chaquetas</button></div>
-                    <div class="card-category" id="cc2"><button class="btn-category">Sudaderas</button></div>
-                    <div class="card-category" id="cc3"><button class="btn-category">Camisetas</button></div>
-                    <div class="card-category" id="cc4"><button class="btn-category">Pantalones</button></div>
-                    <div class="card-category" id="cc5"><button class="btn-category">Leggings</button></div>
-                    <div class="card-category" id="cc6"><button class="btn-category">Sujetadores deportivos</button></div>
-                    <div class="card-category" id="cc7"><button class="btn-category">Accesorios</button></div>
+                <div class="cards-carousel" id="carousel-woman">
+                    <!--<div class="card-category" id="jacW"><button class="btn-category">CHAQUETAS</button></div>
+                    <div class="card-category" id="pulW"><button class="btn-category">SUDADERAS</button></div>
+                    <div class="card-category" id="tshW"><button class="btn-category">CAMISETAS</button></div>
+                    <div class="card-category" id="panW"><button class="btn-category">PANTALONES</button></div>
+                    <div class="card-category" id="legW"><button class="btn-category">LEGGINGS</button></div>
+                    <div class="card-category" id="bra"><button class="btn-category">SUJETADORES DEPORTIVOS</button></div>
+                    <div class="card-category" id="accW"><button class="btn-category">ACCESORIOS</button></div> -->
                 </div>
             </section>
         </section>
         <!--Empieza la categoría de hombre-->
-        <div class="video-container">
-            <div class="text-content">
-                <h1>HOMBRE</h1>
-                <p>Descubre la nueva colección para entrenar con comodidad y estilo.</p>
-                <button>Ver más
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>                        
-            </div>
+        <div class="video-container-man">
+          <video autoplay muted loop playsinline>
+            <source src="/assets/video/video-man.mp4" type="video/mp4" />
+          </video>
+          <div class="text-content">
+            <h1>HOMBRE</h1>
+            <p>Descubre la nueva colección para entrenar con comodidad y estilo</p>
+            <button class="btn-more">
+              VER MÁS <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
+        
         <section class="cards-cartegories">
-            <section class="carousel">
-                <div class="carousel header">
-                    <div>
-                        <h5>CATEGORÍAS</h5>
-                        <i class="fa-solid fa-circle-arrow-left"></i> <i class="fa-solid fa-circle-arrow-right"></i>
-                    </div>
-                </div>
+            <section class="carousel-block">
+              <div class="carousel-header">
+                <h2>CATEGORÍAS</h2>
+              </div>              
                 <!--Aquí va el carousel de productos de hombre-->
-                <div class="cards-carousel">
-                    <div class="card-category" id="cc8"><button class="btn-category">Chaquetas</button></div>
-                    <div class="card-category" id="cc9"><button class="btn-category">Sudaderas</button></div>
-                    <div class="card-category" id="cc10"><button class="btn-category">Camisetas</button></div>
-                    <div class="card-category" id="cc11"><button class="btn-category">Pantalones</button></div>
-                    <div class="card-category" id="cc12"><button class="btn-category">Leggings</button></div>
-                    <div class="card-category" id="cc13"><button class="btn-category">Accesorios</button></div>
+                <div class="cards-carousel" id="carousel-man">
+                    <!--<div class="card-category" id="jacM"><button class="btn-category">CHAQUETAS</button></div>
+                    <div class="card-category" id="pulM"><button class="btn-category">SUDADERAS</button></div>
+                    <div class="card-category" id="tshM"><button class="btn-category">CAMISETAS</button></div>
+                    <div class="card-category" id="panM"><button class="btn-category">PANTALONES</button></div>
+                    <div class="card-category" id="legM"><button class="btn-category">LEGGINGS</button></div>
+                    <div class="card-category" id="accM"><button class="btn-category">ACCESORIOS</button></div>-->
                 </div>
             </section>
         </section>
@@ -153,7 +161,7 @@
                   </label>
                 </div>
                 <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn-subscribe">
-                  Enviar
+                  ENVIAR
                 </button>
               </div>
             </form>
@@ -163,21 +171,18 @@
             <div class="logo-column">
               <img src="./assets/logos/white-01.svg" alt="Logotipo versión negativo" class="footer-logotipo" />
             </div>
-            <!-- Redes sociales -->
-            <div class="social-media">
+          
+            <div class="center-column">
               <ul class="social-media-row">
-                <li><a href="https://www.facebook.com/sirokocom" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a></li>
-                <li><a href="https://www.instagram.com/siroko/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
-                <li><a href="https://x.com/sirokocom" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a></li>
-                <li><a href="https://www.linkedin.com/company/sirokocom" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                <li><a href="https://www.youtube.com/siroko" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
-                <li><a href="https://es.pinterest.com/sirokocom/" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
               </ul>
-            </div>
-            <!-- Enlaces legales -->
-            <div class="legal">
-              <ul class="inline-text">
-                <li>© 2025 Siroko</li>
+          
+              <ul class="legal-links">
                 <li><a href="#">Aviso legal</a></li>
                 <li><a href="#">Cookies</a></li>
                 <li><a href="#">Términos y condiciones</a></li>

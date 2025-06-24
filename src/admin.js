@@ -31,7 +31,7 @@ async function renderProducts() {
       const categoryName = category ? category.name : "Desconocida";
 
       //Realizar lo mismo para subcategoría
-       const subcategory = category?.subcategories.find(sub => Number(sub.id) === Number(product.subcategoryId));
+      const subcategory = category?.subcategories.find(sub => Number(sub.id) === Number(product.subcategoryId));
       const subcategoryName = subcategory ? subcategory.name : "Desconocida";
 
       // Crear el elemento tr (fila) para reenderizar en la tabla y lo asignamos a la variable row
@@ -46,17 +46,437 @@ async function renderProducts() {
         <td>${subcategoryName}</td>
         <td>$${product.price}</td>
         <td>
-          <button class="edit-btn">Edit</button>
-          <button class="delete-btn">Delete</button>
+          <button class="edit-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out" data-id="${product.id}">Editar</button>
+         <button class="delete-btn" onclick="deleteProduct('${product.id}')">Delete</button>
+        
         </td>
       `;
       //Asignamos la fila creada al cuerpo de la tabla
       tableBody.appendChild(row);
     });
 
+    // Boton para editar el modal
+    tableBody.addEventListener("click", (event) => {
+      // Check if the clicked element has the 'edit-btn' class
+      if (event.target.classList.contains("edit-btn")) {
+        const productId = event.target.dataset.id; // Get the product ID from the data-id attribute
+        cargarProductoEnFormulario(productId);
+        modal.showModal(); // Assuming you want to open the modal for editing
+      }
+    });
+
     // Establecemos el mensaje de error que saldrá si no se ejecuta lo del try
   } catch (err) {
     console.error("Error fetching products or categories:", err);
+  }
+}
+
+// Ejecutar al cargar
+renderProducts();
+
+
+
+const openModalBtn = document.getElementById("openModal");
+const modal = document.getElementById("modalProduct");
+const cancelBtn = document.getElementById("cancel");
+
+const genderSelect = document.getElementById("gender-select");
+const categorySelect = document.getElementById("category-select");
+
+
+
+let categories = [];
+
+// 1. Abrir modal
+openModalBtn.addEventListener("click", () => {
+  modal.showModal();
+  form.reset()
+  titleForm.textContent = "Crear Producto";
+  createBtn.textContent = "Crear"
+});
+
+// 2. Cerrar modal con botón cancelar
+cancelBtn.addEventListener("click", () => {
+  modal.close();
+});
+
+
+
+// 3. Cerrar modal clic fuera del contenido
+modal.addEventListener("click", (event) => {
+  if (event.target === modal) {
+
+    modal.close();
+  }
+});
+
+// 4. Fetch de categorías
+async function fetchCategories() {
+  try {
+    const res = await fetch(API_URL2);
+    categories = await res.json();
+    populateGenderSelect();
+  } catch (error) {
+    console.error("Error al cargar categorías:", error);
+  }
+}
+
+// 5. Poblar select de género (categorías principales)
+function populateGenderSelect() {
+  genderSelect.innerHTML = `<option disabled selected>-- Selecciona un género --</option>`;
+
+  categories.forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat.id; // Guardamos ID para usarlo después
+    option.textContent = cat.name;
+    genderSelect.appendChild(option);
+  });
+
+  genderSelect.disabled = false;
+}
+
+// 6. Poblar subcategorías al seleccionar género
+function populateSubcategories(categoryId) {
+  categoryId = Number(categoryId); // Asegura que sea número
+  const selectedCategory = categories.find(cat => Number(cat.id) === categoryId);
+
+  categorySelect.innerHTML = ""; // Limpiar
+
+  if (selectedCategory && selectedCategory.subcategories?.length > 0) {
+    selectedCategory.subcategories.forEach(sub => {
+      const option = document.createElement("option");
+      option.value = sub.id;
+      option.textContent = sub.name;
+      categorySelect.appendChild(option);
+    });
+    categorySelect.disabled = false;
+  } else {
+    categorySelect.innerHTML = `<option disabled selected>No hay subcategorías</option>`;
+    categorySelect.disabled = true;
+  }
+}
+
+// 7. Evento al cambiar género
+genderSelect.addEventListener("change", (e) => {
+  populateSubcategories(e.target.value);
+});
+
+// 8. Ejecutar al iniciar
+fetchCategories();
+
+
+const createBtn = document.getElementById("create");
+const form = document.querySelector("form");
+
+
+// Evitar recarga al enviar
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  //const id = parseInt(document.getElementById("product-id").value);
+  let id
+  const name = document.getElementById("product-name").value;
+  const price = parseFloat(document.getElementById("product-price").value);
+  const categoryId = parseInt(document.getElementById("gender-select").value);
+  const subcategoryId = parseInt(document.getElementById("category-select").value);
+  const description = document.getElementById("text").value;
+  const imageInput = document.getElementById("image");
+
+  // Convertir imagen a base64
+  const imageFile = imageInput.files[0];
+  const imageBase64 = await toBase64(imageFile);
+
+  const newProduct = {
+    id,
+    name,
+    price,
+    categoryId,
+    subcategoryId,
+    description,
+    image: imageBase64 // Enviar como base64 o URL si usas Cloudinary
+  };
+
+    try {
+    if (modoEdicion) {
+      // Solo actualizar producto existente
+      await fetch(`${API_URL}/${idEditando}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct)
+      });
+      alert("Producto actualizado con éxito");
+    } else {
+      // Solo crear producto nuevo
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct)
+      });
+      if (res.ok) {
+        alert("Producto creado con éxito");
+      } else {
+        throw new Error("Error al crear producto");
+      }
+    }
+    form.reset();
+    modal.close();
+    modoEdicion = false;
+    idEditando = null;
+    titleForm.textContent = "Crear nuevo producto";
+    document.getElementById("create").textContent = "Crear";
+    renderProducts();
+  } catch (error) {
+    alert("Error al guardar");
+    console.error(error);
+  }
+});
+
+// Función para convertir imagen a base64
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result); // Devuelve base64
+    reader.onerror = error => reject(error);
+    reader.readAsDataURL(file);
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let modoEdicion = false;
+let idEditando = null;
+const titleForm = document.getElementById("titleForm");
+
+//cargar para editarlo
+async function cargarProductoEnFormulario(id) {
+  try {
+    const res = await fetch(`${API_URL}/${id}`);
+    const product = await res.json();
+
+    id = product.id; 
+    document.getElementById("product-name").value = product.name;
+    document.getElementById("product-price").value = product.price;
+    document.getElementById("text").value = product.description;
+
+    // Handle category and subcategory selects for editing
+    await fetchCategories(); // Ensure categories are loaded
+    genderSelect.value = product.categoryId;
+    populateSubcategories(product.categoryId); // Populate subcategories based on selected category
+    // Delay setting subcategory value slightly to ensure options are rendered
+    setTimeout(() => {
+      categorySelect.value = product.subcategoryId;
+    }, 100);
+
+
+    modoEdicion = true;
+    idEditando = id;
+    titleForm.textContent = "Editar producto";
+    createBtn.textContent = "Editar"
+
+  } catch (error) {
+    alert("error al cargar el producto");
+    console.error(error);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+// DELETE
+   // Boton de Borrar
+async function deleteProduct(id) {
+  const confirmDelete = confirm("Estas seguro de querer eliminar este producto?");
+  if (!confirmDelete) // Si le dan a cancelar
+     return; // Devuelve los datos 
+
+  try {
+    await fetch(`${API_URL}/${id}`, { // Pide a la Api
+      method: "DELETE" // Eliminar el producto
+    });
+
+    renderProducts();
+
+  } catch (err) {
+    console.error("Error deleting product:", err);
+  }
+}
+
+// Ejecutar al cargar
+renderProducts();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//cargar para editarlo
+async function cargarProductoEnFormulario(id) {
+  try {
+    const res = await fetch(`${API_URL}/${id}`);
+    const product = await res.json();
+
+   // document.getElementById("product-id").value = product.id; // Assuming you have an ID input field
+    id = product
+    document.getElementById("product-name").value = product.name;
+    document.getElementById("product-price").value = product.price;
+    document.getElementById("text").value = product.description;
+
+    // Handle category and subcategory selects for editing
+    await fetchCategories(); // Ensure categories are loaded
+    genderSelect.value = product.categoryId;
+    populateSubcategories(product.categoryId); // Populate subcategories based on selected category
+    // Delay setting subcategory value slightly to ensure options are rendered
+    setTimeout(() => {
+      categorySelect.value = product.subcategoryId;
+    }, 100);
+
+
+    modoEdicion = true;
+    idEditando = product.id;
+    titleForm.textContent = "Editar producto";
+    createBtn.textContent = "Editar"
+  } catch (error) {
+    alert("error al cargar el producto");
+    console.error(error);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+// DELETE
+   // Boton de Borrar
+async function deleteProduct(id) {
+  const confirmDelete = confirm("Estas seguro de querer eliminar este producto?");
+  if (!confirmDelete) // Si le dan a cancelar
+     return; // Devuelve los datos 
+
+  try {
+    await fetch(`${API_URL}/${id}`, { // Pide a la Api
+      method: "DELETE" // Eliminar el producto
+    });
+
+    renderProducts();
+
+  } catch (err) {
+    console.error("Error deleting product:", err);
   }
 }
 

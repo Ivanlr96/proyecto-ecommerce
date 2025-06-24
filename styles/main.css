@@ -1,0 +1,456 @@
+body {
+    background-color: rgb(251, 251, 247);
+    font-family: "Inter", sans-serif;
+    color:rgb(17, 17, 17);
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: (rgb(251, 251, 247));
+    font-weight: 600;
+    margin-left: 24px;
+}
+
+h2 {
+    font-weight: 600;
+    margin-left: 24px;
+}
+
+p {
+    color: (rgb(251, 251, 247));
+    font-weight: 400;
+    margin-left: 24px;
+}
+
+button {
+    color:rgb(17, 17, 17);
+    background-color: transparent;
+    border: none;
+}
+button:hover {
+    color:rgb(51, 51, 51);
+}
+
+.fa-solid {
+    color:rgb(17, 17, 17);
+    font-size: 24px;
+}
+
+.fa-arrow-right {
+    color: rgb(251, 251, 247);
+}
+
+/* nav-bar */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    height: 70px;
+    position: relative;
+    margin-bottom: 32px;
+  }
+  
+  .nav-left {
+    display: flex;
+    align-items: left;
+    gap: 1rem;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: right;
+    gap: 1rem;
+  }
+  
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  
+  .logo-container img {
+    width: 150px;
+    height: auto;
+  }
+
+  /*menu*/
+#side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 100vh;
+    background-color: rgb(251, 251, 247);
+    color: rgb(17, 17, 17);
+    padding: 32px 24px;
+    overflow-y: auto;
+    z-index: 9999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  #side-menu.visible {
+    transform: translateX(0);
+  }
+  
+  #close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: rgb(17, 17, 17);
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  .gender-tabs {
+    display: flex;
+    gap: 12px;
+    margin-top: 60px;
+  }
+  
+  .gender-tabs .tab {
+    background-color: transparent;
+    color: rgb(17, 17, 17);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+  }
+  
+  .gender-tabs .tab.active {
+    color: rgb(17, 17, 17);
+    font-weight: 600;
+  }
+  
+  /* Categorías */
+  .categories {
+    margin-top: 24px;
+    display: none;
+  }
+
+  .categories.active {
+    display: block;
+  }
+  
+  .categories ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .categories li {
+    margin-bottom: 12px;
+  }
+  
+  .categories a {
+    color: rgb(17, 17, 17);
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.2s;
+  }
+  
+  .categories a:hover {
+    text-decoration: none;
+    color:rgb(51, 51, 51);
+  }
+
+  /* Contenido */
+  .video-container-woman {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+  }
+  
+  .video-container-woman video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .video-container-man {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+  }
+  
+  .video-container-man video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .text-content {
+    position: absolute;
+    top: 20%;
+    left: 24px;
+    transform: translateY(-20%);
+    z-index: 2;
+    color: rgb(251, 251, 247);
+    max-width: 300px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-more {
+    background-color: rgb(17, 17, 17);
+    color:rgb(251, 251, 247);
+    border-radius: 50px;
+    border: none;
+    padding: 16px;
+    min-width: 160px;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.btn-more:hover {
+    background-color:rgb(51, 51, 51);
+    color: rgb(251, 251, 247);
+}
+
+.carousel-block {
+    margin-top: 24px; 
+    margin-bottom: 36px;  
+}  
+
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 16px;
+}
+  
+  .carousel-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.cards-carousel {
+    display: flex;
+    flex-direction: row;
+    gap: 12px; 
+    overflow-x: auto;
+    padding: 0 24px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.card-category {
+    height: 355px;
+    width: 284px;
+    border-radius: 16px;
+    background-size: cover;      
+    background-position: center;  
+    background-repeat: no-repeat;  
+    position: relative;            
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    z-index: 1;
+}
+
+.photo {
+  height: 355px;
+  width: 284px;
+
+}
+
+/*#jacW{
+    background-image: url('/assets/fotos_mujer/chaquetas.webp');
+}
+#pulW{
+    background-image: url('/assets/fotos_mujer/sudaderas.webp');
+}
+#tshW{
+    background-image: url('/assets/fotos_mujer/camisetas.webp');
+}
+#panW{
+    background-image: url('/assets/fotos_mujer/pantalones.webp');
+}
+#legW{
+    background-image: url('/assets/fotos_mujer/leggings.webp');
+}
+#bra{
+    background-image: url('/assets/fotos_mujer/sujetadores.webp');
+}
+#accW{
+    background-image: url('/assets/fotos_mujer/accesorios.webp');
+}
+#jacM{
+    background-image: url('/assets/fotos_hombre/chaquetas-hombre.webp');
+}
+#pulM{
+    background-image: url('/assets/fotos_hombre/sudaderas-hombre.webp');
+}
+#tshM{
+    background-image: url('/assets/fotos_hombre/camisetas-hombre.webp');
+}
+#panM{
+    background-image: url('/assets/fotos_hombre/pantalones-hombre.webp');
+}
+#legM{
+    background-image: url('/assets/fotos_hombre/leggings-hombre.webp');
+}
+#accM{
+    background-image: url('/assets/fotos_hombre/accesorios-hombre.webp');
+}*/
+
+.btn-category { 
+    background-color: rgb(17, 17, 17);
+    color:rgb(251, 251, 247);
+    border-radius: 50px;
+    border: none;
+    padding: 12px;
+    max-width: 350px;
+    min-width: 150px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    z-index: 2;
+}
+
+.btn-category:hover {
+    background-color:rgb(51, 51, 51);
+    color: rgb(251, 251, 247);
+}
+
+
+/* footer */
+
+footer {
+    background-color: rgb(17, 17, 17);
+    color: rgb(251, 251, 247);
+    padding: 24px;
+    margin-top: 40px;
+  }
+  
+  .mailing-footer {
+    width: 100%;
+  }
+  
+  .newsletter-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  
+  #cta {
+    max-width: 450px;
+    text-align: left;
+    flex: 1;
+  }
+  
+  .field-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    flex: 2;
+  }
+  
+  .email-input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    min-width: 220px;
+  }
+  
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .btn-subscribe {
+    background-color: rgb(78, 78, 236);
+    color: rgb(251, 251, 247);
+    border-radius: 50px;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+  
+  .btn-subscribe:hover {
+    background-color: rgb(106, 106, 255);
+  }
+  
+
+.footer-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 60px;
+    padding: 24px;
+    color: rgb(251, 251, 247);
+    flex-wrap: wrap;
+  }
+  
+  .logo-column img {
+    width: 120px;
+    height: auto;
+  }
+  
+  .center-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+  }
+  
+  .social-media-row,
+  .legal-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  .social-media-row a,
+  .legal-links a {
+    color: rgb(251, 251, 247);
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  .social-media-row a:hover,
+  .legal-links a:hover {
+    color:rgb(51, 51, 51);
+  }

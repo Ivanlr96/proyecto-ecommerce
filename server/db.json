@@ -1,12 +1,13 @@
 {
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Man",
       "subcategories": [
         {
           "id": 101,
-          "name": "Camisetas"
+          "name": "Camisetas", 
+          "image": "./assets/fotos_hombre/camisetas-hombre.webp"
         },
         {
           "id": 102,
@@ -15,7 +16,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Woman",
       "subcategories": [
         {
@@ -30,15 +31,7 @@
     }
   ],
   "products": [
-    {
-      "id": 89,
-      "image": "https://i.imgur.com/QkIa5tT.jpeg",
-      "name": "Majestic Mountain Graphic T-Shirt",
-      "categoryId": 1,
-      "subcategoryId": 101,
-      "price": 44,
-      "description": "Elevate your wardrobe with this stylish black t-shirt featuring a striking monochrome mountain range graphic. Perfect for those who love the outdoors or want to add a touch of nature-inspired design to their look, this tee is crafted from soft, breathable fabric ensuring all-day comfort. Ideal for casual outings or as a unique gift, this t-shirt is a versatile addition to any collection."
-    }
     
+     
   ]
 }
