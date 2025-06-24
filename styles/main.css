@@ -263,10 +263,7 @@ button:hover {
 .card-category {
     height: 355px;
     width: 284px;
-    border-radius: 16px;
-    background-size: cover;      
-    background-position: center;  
-    background-repeat: no-repeat;  
+    border-radius: 16px;  
     position: relative;            
     overflow: hidden;
     display: flex;
@@ -279,9 +276,11 @@ button:hover {
 }
 
 .photo {
-  height: 355px;
-  width: 284px;
-
+  height: 100%;
+  width: 100%;
+  object-fit: fill; 
+  object-position: center 35%;
+ 
 }
 
 /*#jacW{
@@ -336,7 +335,7 @@ button:hover {
     font-weight: 600;
     font-size: 16px;
     z-index: 2;
-}
+  }
 
 .btn-category:hover {
     background-color:rgb(51, 51, 51);
