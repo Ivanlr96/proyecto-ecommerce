@@ -275,6 +275,13 @@ button:hover {
     padding-bottom: 20px;
     flex: 0 0 auto;
     scroll-snap-align: start;
+    z-index: 1;
+}
+
+.photo {
+  height: 355px;
+  width: 284px;
+
 }
 
 /*#jacW{
@@ -328,6 +335,7 @@ button:hover {
     text-align: center;
     font-weight: 600;
     font-size: 16px;
+    z-index: 2;
 }
 
 .btn-category:hover {

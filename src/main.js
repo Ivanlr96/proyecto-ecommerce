@@ -73,6 +73,7 @@ async function loadSubcategoriesMenu() {
   try {
     const res = await fetch(API_URL2);
     const categories = await res.json();
+    console.log(categories);
 
     const womanList = document.querySelector("#woman ul");
     const manList = document.querySelector("#man ul");
@@ -89,11 +90,12 @@ async function loadSubcategoriesMenu() {
 
         li.appendChild(link);
 
-        if (category.name.toUpperCase() === "woman") {
+        if (category.name.toLowerCase() === "woman") {
           womanList.appendChild(li);
-        } else if (category.name.toUpperCase() === "man") {
+        } else if (category.name.toLowerCase() === "man") {
           manList.appendChild(li);
         }
+
       });
     });
   } catch (error) {
@@ -113,32 +115,35 @@ async function loadCategories() {
   const res = await fetch(`${API_URL2}`);
   const categoriesData = await res.json();
 
-  const resSubcategories = await fetch(`${API_URL2}`);
-  const subcategories = await resSubcategories.json();
-  console.log(subcategories)
+  //const resSubcategories = await fetch(`${API_URL2}`);
+  //const subcategories = await resSubcategories.json();
+  //console.log(subcategories)
 
   
   categoriesData.forEach((category) => {
-    category.subcategories.forEach((subcat) => {
-      const subcategoryImage = subcategories.find(p => p.subcategoryId === subcat.id && p.image);
+    const carousel = document.querySelector(`#carousel-${category.name.toLowerCase()}`);
 
-      if(!subcategoryImage) return;
+    category.subcategories.forEach((subcat) => {
+      //const subcategoryImage = subcategories.find(p => p.subcategoryId === subcat.id && p.image);
+
+      //if(!subcategoryImage) return;
 
       const card = document.createElement("div");
       card.classList.add("card-category");
+      console.log(subcat.name);
+     // <img src="${subcategoryImage.image}" alt=${subcat.name}"/>
 
       card.innerHTML = `
       <div class="image-wrapper">
-       <img src="${subcategoryImage.image}" alt=${subcat.name}"/>
       </div>
       <div class="card-content">
-        <span class="subcategory-name">@${subcat.name.toUpperCase()}</span>
+      <img class="photo" src="${subcat.image}">
        <button class="btn-category" onclick="location.href='/subcategories/${subcat.id}'">
-             ${subcat.name}
+             ${subcat.name.toUpperCase()}
             </button>
           </div>`;
 
-          carouselContainer.appendChild(card);
+          carousel.appendChild(card);
     });
     
   });

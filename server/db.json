@@ -6,7 +6,8 @@
       "subcategories": [
         {
           "id": 101,
-          "name": "Camisetas"
+          "name": "Camisetas", 
+          "image": "./assets/fotos_hombre/camisetas-hombre.webp"
         },
         {
           "id": 102,
