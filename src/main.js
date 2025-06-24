@@ -29,6 +29,8 @@ function openMenu() {
     sideMenu.setAttribute("aria-hidden", "false");
     sideMenu.classList.replace("fa-bars", "fa-xmark");
     menuToggle.setAttribute("aria-label", "cerrar menú");
+
+    loadSubcategoriesMenu();
 }
 
 function closeMenu() {
@@ -66,6 +68,42 @@ tabButtons.forEach((button) => {
     }); 
 });
 
+//GET subcategorías del menú
+async function loadSubcategoriesMenu() {
+  try {
+    const res = await fetch(API_URL2);
+    const categories = await res.json();
+
+    const womanList = document.querySelector("#woman ul");
+    const manList = document.querySelector("#man ul");
+
+    womanList.innerHTML = "";
+    manList.innerHTML = "";
+
+    categories.forEach((category) => {
+      category.subcategories.forEach((subcat) => {
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `/subcategories/${subcat.id}`;
+        link.textContent = subcat.name;
+
+        li.appendChild(link);
+
+        if (category.name.toUpperCase() === "woman") {
+          womanList.appendChild(li);
+        } else if (category.name.toUpperCase() === "man") {
+          manList.appendChild(li);
+        }
+      });
+    });
+  } catch (error) {
+    console.error(error);
+    alert("No se pudieron cargar las subcategorías ☹️");
+  }
+}
+
+loadSubcategoriesMenu();
+
 // GET de los dos carruseles
 async function loadCategories() {
   carouselContainer.innerHTML = "";
@@ -96,10 +134,11 @@ async function loadCategories() {
       <div class="card-content">
         <span class="subcategory-name">@${subcat.name.toUpperCase()}</span>
        <button class="btn-category" onclick="location.href='/subcategories/${subcat.id}'">
-       <button class="btn-category" onclick="location.href='/subcategorias/${subcat.id}'">
              ${subcat.name}
             </button>
           </div>`;
+
+          carouselContainer.appendChild(card);
     });
     
   });
