@@ -406,3 +406,8 @@ nav {
     }
 }
 
+.clear-all{
+    background-color: transparent;
+    color: #bbbcbc;
+    font-size: 13px;
+}
