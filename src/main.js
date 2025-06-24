@@ -1,15 +1,20 @@
 const API_URL2 = "http://localhost:3000/categories";
+
 const menuToggle = document.getElementById('menu-toggle');
 const sideMenu = document.getElementById('side-menu');
 const btnClose = document.getElementById('close-menu');
 const menuIcon = menuToggle.querySelector("i");
+
 //estas dos son las categorías sólo del menú
 const tabButtons = document.querySelectorAll('.gender-tabs .tab');
 const categories = document.querySelectorAll('.categories');
+
 const carouselContainer = document.querySelector('.cards-carousel');
+
 menuToggle.addEventListener("click", toggleMenu);
 btnClose.addEventListener("click", closeMenu);
 document.addEventListener("click", handleClickOutside);
+
 //Funciones menú
 function toggleMenu() {
     if (sideMenu.classList.contains("visible")) {
@@ -54,6 +59,7 @@ tabButtons.forEach((button) => {
       });
     });
 });
+
 //GET subcategorías del menú
 async function loadSubcategoriesMenu() {
   try {
@@ -80,28 +86,25 @@ async function loadSubcategoriesMenu() {
     });
   } catch (error) {
     console.error(error);
-    alert("No se pudieron cargar las subcategorías :cara_blanca_ceñuda:");
+    alert("No se pudieron cargar las subcategorías ☹️");
   }
 }
 loadSubcategoriesMenu();
+
 // GET de los dos carruseles
 async function loadCategories() {
   carouselContainer.innerHTML = "";
   try {
   const res = await fetch(`${API_URL2}`);
   const categoriesData = await res.json();
-  //const resSubcategories = await fetch(`${API_URL2}`);
-  //const subcategories = await resSubcategories.json();
-  //console.log(subcategories)
+ 
   categoriesData.forEach((category) => {
     const carousel = document.querySelector(`#carousel-${category.name.toLowerCase()}`);
     category.subcategories.forEach((subcat) => {
-      //const subcategoryImage = subcategories.find(p => p.subcategoryId === subcat.id && p.image);
-      //if(!subcategoryImage) return;
+     
       const card = document.createElement("div");
       card.classList.add("card-category");
       console.log(subcat.name);
-     // <img src="${subcategoryImage.image}" alt=${subcat.name}"/>
       card.innerHTML = `
       <div class="image-wrapper">
       </div>
@@ -115,7 +118,7 @@ async function loadCategories() {
     });
   });
  } catch(error){
-    alert("error al cargar las subcategorías :cara_blanca_ceñuda::exclamación:️");
+    alert("error al cargar las subcategorías ☹️❗️");
     console.error(error);
  }
 }
