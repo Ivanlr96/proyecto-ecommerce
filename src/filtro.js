@@ -8,22 +8,26 @@ async function getProducts() {
     const res = await fetch(API_URL)
     const products = await res.json()
     console.log(products)
-    
+    let card = ""
     products.forEach(product => {
-        productsContainer.innerHTML = `
+   
+        card += `
     
-<article class="product-card">
+                 <article class="product-card">
                     <div class="product-image">
-                        <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/images-TraceGraphicOversizedT_ShirtGSSourPinkB4B3P_KCPK_0681_A_0092_3840x.jpg?v=1746464011"
-                            alt="Trace Graphic Oversized T-Shirt">
+                        <img src="${product.image}" alt="${product.name}">
+                        <button class="add-to-cart" aria-label="Add to Cart">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
                     </div>
                     <div class="product-details">
                         <h4>${product.name}</h4>
-                        <p class="price">${product.price}</p>
+                        <p class="price">${product.price}€</p>
                     </div>
                 </article>
  `
 
+    productsContainer.innerHTML = card
     });
 
 
