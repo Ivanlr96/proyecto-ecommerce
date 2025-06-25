@@ -3,36 +3,68 @@
 const API_URL = "http://localhost:3000/products";
 const API_URL2 = "http://localhost:3000/categories";
 
-// Tus datos actualizados (asumiendo que 'appData' es donde resides tus datos principales)
-const appData = {
-  "categories": [
-    // ... tus categorías y subcategorías actuales ...
-  ],
-  "products": [
-    {
-      "id": "f46e",
-      "name": "camiseta",
-      "price": 20,
-      "categoryId": "2", // Nota: Lo he puesto como string para coincidir con el id de categoría "2"
-      "subcategoryId": 205,
-      "description": "camiseta blanca",
-      "image": "data:image/png;base64,..." // Tu base64 completo
-    }
-  ]
+// appData ahora se inicializa vacía o con una estructura mínima,
+// y sus contenidos serán llenados por las APIs.
+let appData = {
+    categories: [],
+    products: []
 };
-
-
 
 // --- Nueva preparación de datos ---
 let searchableItems = [];
+let searchTimeout; // necesaria para el debounce
 
-// --- FUNCIÓN ACTUALIZADA: Prepara los datos para la búsqueda ---
+
+console.log(initializeDataAndSearch());
+// --- NUEVA FUNCIÓN MAESTRA DE CARGA DE DATOS ---
+// ¿Por qué async? Porque hacemos peticiones de red que son asíncronas.
+// ¿Por qué la llamamos al inicio? Para que el buscador tenga datos desde el primer momento.
+async function initializeDataAndSearch() {
+    try {
+        // 1. Cargar categorías
+        // ¿Por qué esta primera petición? Para obtener la estructura de categorías/subcategorías.
+        const categoriesResponse = await fetch(API_URL2);
+        if (!categoriesResponse.ok) {
+            throw new Error(`Error al cargar categorías: ${categoriesResponse.status}`);
+        }
+        appData.categories = await categoriesResponse.json();
+        console.log("Categorías cargadas:", appData.categories); // Para depuración
+
+        // 2. Cargar productos
+        // ¿Por qué esta segunda petición? Para obtener la lista de productos.
+        const productsResponse = await fetch(API_URL);
+        if (!productsResponse.ok) {
+            throw new Error(`Error al cargar productos: ${productsResponse.status}`);
+        }
+        appData.products = await productsResponse.json();
+        console.log("Productos cargados:", appData.products); // Para depuración
+
+        // 3. Una vez que appData.categories y appData.products están llenos,
+        // preparamos la lista para el buscador.
+        // ¿Por qué aquí? Porque necesitamos TODOS los datos antes de aplanarlos.
+        prepareSearchableItems();
+
+    } catch (error) {
+        console.error("Fallo crítico al inicializar la aplicación:", error);
+        // Aquí podrías mostrar un mensaje grande de error en la UI al usuario.
+        const resultsContainer = document.getElementById('resultsContainer');
+        if (resultsContainer) {
+            resultsContainer.innerHTML = `<div class="error-message">
+                                            <p>No se pudieron cargar los datos de productos y categorías.</p>
+                                          </div>`;
+        }
+    }
+}
+
+
+
+
+// --- Prepara los datos para la búsqueda ---
 function prepareSearchableItems() {
     searchableItems = []; // Limpiamos la lista existente para reconstruirla
     
     // 1. Añadir categorías y subcategorías
     appData.categories.forEach(category => {
-        // (Opcional) Añadimos la categoría principal si quieres que sea buscable
         searchableItems.push({ 
             id: category.id, 
             name: category.name, 
@@ -82,9 +114,56 @@ function prepareSearchableItems() {
     console.log("Datos de búsqueda actualizados:", searchableItems); 
 }
 
-prepareSearchableItems(); // Ejecútala al cargar la página por primera vez
 
-let searchTimeout; // necesaria para el debounce
+
+
+
+// --- Tu función para añadir un producto (de tu tabla/formulario) ---
+// ¿Por qué la modificamos? Para que interactúe directamente con tu API POST.
+async function addNewProductFromForm(newProductData) {
+    try {
+        console.log("Intentando añadir producto:", newProductData);
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newProductData)
+        });
+
+        if (!response.ok) {
+            // Si la API responde con un error (ej. 400, 500), lanzamos un error.
+            const errorData = await response.json().catch(() => ({ message: 'Error desconocido' }));
+            throw new Error(`Error al añadir el producto: ${response.status} - ${errorData.message || 'Sin mensaje de error'}`);
+        }
+
+        // Si el POST fue exitoso, no necesitamos usar `response.json()` a menos que tu API devuelva el objeto completo.
+        // Lo más importante es que los datos del SERVIDOR están actualizados.
+
+        console.log("Producto añadido exitosamente a la API.");
+
+        // ¿Por qué `initializeDataAndSearch()` de nuevo?
+        // Después de un POST exitoso, volvemos a cargar TODOS los datos del servidor (productos y categorías).
+        // Esto asegura que `appData` y, por lo tanto, `searchableItems` estén completamente sincronizados.
+        await initializeDataAndSearch(); 
+
+        // Opcional: Si el modal de búsqueda está abierto y hay una búsqueda activa,
+        // podrías querer volver a ejecutarla para mostrar los resultados actualizados.
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput && searchInput.value.trim() !== '') {
+            handleSearch(searchInput.value); 
+        }
+
+        alert("¡Producto añadido y buscador actualizado!");
+        // Aquí podrías limpiar el formulario de añadir producto en tu UI.
+
+    } catch (error) {
+        console.error("Error al añadir el producto:", error);
+        alert(`Error al añadir el producto: ${error.message}. Por favor, revisa la consola.`);
+    }
+}
+
+
 
 // ABRIR MODAL DE BÚSQUEDA
 function openSearch() {
@@ -167,9 +246,24 @@ function performSearch(query) {
 function displayResults(items) { 
     const resultsContainer = document.getElementById('resultsContainer');
     
+    // FILTRAMOS AQUÍ: Solo queremos mostrar los elementos que son de tipo 'product'.
+    const productsToDisplay = items.filter(item => item.type === 'product');
+
+    // Si no hay productos después de filtrar (pero sí hay categorías/subcategorías),
+    // podrías mostrar un mensaje diferente si lo deseas, o simplemente no mostrar nada.
+    if (productsToDisplay.length === 0) {
+        resultsContainer.innerHTML = `
+            <div class="no-results">
+                <p>No encontramos productos para tu búsqueda.</p>
+                <p>Prueba con otros términos.</p>
+            </div>
+        `;
+        return; // Salimos de la función si no hay productos que mostrar.
+    }
+
     resultsContainer.innerHTML = `
         <div class="search-results-grid">
-            ${items.map(item => `
+            ${productsToDisplay.map(item => `
                 <div class="product-card ${item.type}"> 
                     <div class="product-image">
                         ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '📷'}
@@ -177,7 +271,7 @@ function displayResults(items) {
                     <div class="product-info">
                         <div class="product-name">${item.name}</div>
                         ${item.subCategoryName && item.type === 'product' ? `<div class="product-type">${item.subCategoryName}</div>` : ''}
-                        ${item.categoryName && item.type !== 'product' ? `<div class="product-type">${item.categoryName}</div>` : ''}
+                        ${item.categoryName && item.type === 'product' ? `<div class="product-category">${item.categoryName}</div>` : ''}
                         ${item.price && item.type === 'product' ? `<div class="product-price">${item.price}</div>` : ''} 
                         ${item.description && item.type === 'product' ? `<div class="product-description">${item.description}</div>` : ''}
                     </div>
@@ -221,17 +315,3 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
-
-
-function addNewProductFromForm(newProductData) {
-    // 1. Añade el nuevo producto al array `products` en tu `appData`
-    appData.products.push(newProductData); 
-    
-    // 2. ¡IMPORTANTE! Vuelve a generar la lista de elementos buscables
-    // para incluir el nuevo producto.
-    prepareSearchableItems(); 
-
-    // 3. Opcional: Aquí podrías querer limpiar el formulario de añadir producto,
-    // o refrescar la visualización de tu tabla de productos si la tienes.
-    // displayProductsInTable();
-}
