@@ -66,16 +66,29 @@
             <div class="product-price">
                 <h4>40€</h4>
             </div>
-            <select id="drop-down">
-                <option>Selecciona una talla</option>
-                <option>XS</option>
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-            </select>
-            <div>
-                <button id="btn-add"></button>
+            <div class="description">
+                <p>Aquí describimos el producto</p>
+            </div>
+            <div class="form-container">
+                <div class="select-container">
+                    <div class="custom-select" id="customSelect">
+                        <span class="text-select">Selecciona una talla</span>
+                        <i class="fa-solid fa-circle-chevron-down"></i>
+                    </div>
+                    <div class="dropdown-options" id="dropdownOptions">
+                        <div class="dropdown-option placeholder" data-value="">Selecciona una talla</div>
+                        <div class="dropdown-option" data-value="XS">XS</div>
+                        <div class="dropdown-option" data-value="S">S</div>
+                        <div class="dropdown-option" data-value="M">M</div>
+                        <div class="dropdown-option" data-value="L">L</div>
+                        <div class="dropdown-option" data-value="XL">XL</div>
+                    </div>
+                </div>
+                <div>
+                    <button id="btn-add">
+                        AÑADIR AL CARRITO
+                    </button>
+                </div>
             </div>
         </div>
       </main>
