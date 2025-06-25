@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
@@ -14,7 +14,7 @@
             <div class="login-box">
                 <img src="assets/logos/favicon-01.svg" alt="Logo Siroko" class="logo">
                 <h1>ACCEDE A TU CUENTA</h1>
-                <form action="/es/login_check" method="post">
+              <form id="login-form">
                     <div class="form-group">
                         <input class="form-control-custom" type="text" id="username" name="_username" placeholder="Correo electrónico" required>
                     </div>
@@ -36,25 +36,7 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const togglePasswordButtons = document.querySelectorAll('.password-toggle-btn');
+    <script src="src/login.js"></script>
 
-            togglePasswordButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetId = this.dataset.target;
-                    const passwordInput = document.querySelector(targetId);
-
-                    if (passwordInput.type === 'password') {
-                        passwordInput.type = 'text';
-                        // Example: button.querySelector('svg').outerHTML = '<svg class="bi bi-eye-slash" ...>';
-                    } else {
-                        passwordInput.type = 'password';
-                        // Example: button.querySelector('svg').outerHTML = '<svg class="bi bi-eye" ...>';
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
