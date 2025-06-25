@@ -62,23 +62,44 @@ async function getProducts() {
         filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-    let html = "";
-    filteredProducts.forEach(product => {
-        html += `
-            <article class="product-card">
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                    <button class="add-to-cart" aria-label="Add to Cart">
-                        <i class="fa-solid fa-cart-plus"></i>
-                    </button>
-                </div>
-                <div class="product-details">
-                    <h4>${product.name}</h4>
-                    <p class="price">${product.price}€</p>
-                </div>
-            </article>
-        `;
-    });
+let html = "";
+filteredProducts.forEach(product => {
+    html += `
+        <article class="product-card">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}">
+                <button class="add-to-cart" aria-label="Add to Cart" data-id="${product.id}">
+                    <i class="fa-solid fa-cart-plus"></i>
+                </button>
+            </div>
+            <div class="product-details">
+                <h4>${product.name}</h4>
+                <p class="price">${product.price}€</p>
+            </div>
+        </article>
+    `;
+});
+productsContainer.innerHTML = html;
 
-    productsContainer.innerHTML = html;
+// Añade listeners a los botones de añadir al carrito
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        const prod = filteredProducts.find(p => String(p.id) === id);
+        addToCart(prod);
+    });
+});
+
+// Función para añadir al carrito en localStorage
+function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Producto añadido al carrito');
+}
 }
