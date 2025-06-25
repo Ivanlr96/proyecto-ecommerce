@@ -2,23 +2,46 @@ const API_URL = "http://localhost:3000/products";
 const API_URL2 = "http://localhost:3000/categories";
 
 const productsContainer = document.getElementById("product-cards-container");
-const title = document.getElementById("name")
+const title = document.getElementById("name");
 
-// Lee el parámetro de la URL
+// Lee los parámetros de la URL
 const params = new URLSearchParams(window.location.search);
-const gender = params.get("gender"); // 'woman' o 'man'
+const gender = params.get("gender") || params.get("category"); // 'woman' o 'man'
+const subcategory = params.get("subcategory");
 
 async function getProducts() {
     const res = await fetch(API_URL);
     const products = await res.json();
-    title.textContent = "Todos nuestros productos disponibles"
-    // Filtra según el género
     let filteredProducts = products;
-    if (gender) {
 
-        const genderId = gender === "man" ? "1" : "2";
-        filteredProducts = products.filter(product => String(product.categoryId) === genderId);
-        title.textContent = gender.toUpperCase()
+    // Filtra por género si existe
+    let genderId;
+    if (gender) {
+        genderId = gender === "hombre" ? "1" : "2";
+        filteredProducts = filteredProducts.filter(product => String(product.categoryId) === genderId);
+        title.textContent = gender.toUpperCase();
+    } else {
+        title.textContent = "Todos nuestros productos disponibles";
+    }
+
+    // Filtra por subcategoría si existe
+    if (subcategory) {
+        filteredProducts = filteredProducts.filter(product => String(product.subcategoryId) === subcategory);
+
+        // Obtener el nombre de la subcategoría
+        const resCat = await fetch(API_URL2);
+        const categories = await resCat.json();
+        // Busca la categoría correspondiente
+        const categoryObj = categories.find(cat => String(cat.id) === genderId);
+        // Busca la subcategoría por id
+        let subcatName = subcategory;
+        if (categoryObj) {
+            const subcatObj = categoryObj.subcategories.find(sub => String(sub.id) === subcategory);
+            if (subcatObj) {
+                subcatName = subcatObj.name.toUpperCase();
+            }
+        }
+        title.textContent = `${subcatName} DE ${gender.toUpperCase()}`;
     }
 
     let html = "";

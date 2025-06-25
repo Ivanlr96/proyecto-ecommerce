@@ -66,20 +66,22 @@ async function loadSubcategoriesMenu() {
     const res = await fetch(API_URL2);
     const categories = await res.json();
     console.log(categories);
-    const womanList = document.querySelector("#woman ul");
-    const manList = document.querySelector("#man ul");
+    const womanList = document.querySelector("#mujer ul");
+    const manList = document.querySelector("#hombre ul");
     womanList.innerHTML = "";
     manList.innerHTML = "";
     categories.forEach((category) => {
+      console.log(category.name)
       category.subcategories.forEach((subcat) => {
+    
         const li = document.createElement("li");
         const link = document.createElement("a");
         link.href = `/subcategories/${subcat.id}`;
         link.textContent = subcat.name;
         li.appendChild(link);
-        if (category.name.toLowerCase() === "woman") {
+        if (category.name.toLowerCase() === "mujer") {
           womanList.appendChild(li);
-        } else if (category.name.toLowerCase() === "man") {
+        } else if (category.name.toLowerCase() === "hombre") {
           manList.appendChild(li);
         }
       });
@@ -110,7 +112,7 @@ async function loadCategories() {
       </div>
       <div class="card-content">
       <img class="photo" src="${subcat.image}">
-       <button class="btn-category" onclick="location.href='/subcategories/${subcat.id}'">
+      <button class="btn-category" onclick="location.href='subcategory.html?category=${category.name.toLowerCase()}&subcategory=${subcat.id}'">
              ${subcat.name.toUpperCase()}
             </button>
           </div>`;
