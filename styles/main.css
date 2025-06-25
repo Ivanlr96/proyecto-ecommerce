@@ -424,7 +424,7 @@ footer {
   font-size: 12px;
   font-weight: bold;
   padding: 2px 6px;
-  border-radius: 999px; /* Esto da forma de píldora o círculo según contenido */
+  border-radius: 999px;
   display: inline-block;
   min-width: 18px;
   text-align: center;
