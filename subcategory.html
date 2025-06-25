@@ -277,15 +277,13 @@
 
   <!--carrito-->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
   const cartButtons = document.querySelectorAll(".add-to-cart");
   const cartCount = document.getElementById("cart-count");
 
+  // Inicializar contador desde localStorage
   let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-  // Mostrar cantidad total
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = totalItems;
+  cartCount.textContent = cart.length;
 
   cartButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -294,30 +292,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const price = productCard.querySelector(".price").innerText;
       const imgSrc = productCard.querySelector("img").src;
 
-      const productId = title.toLowerCase().replace(/\s+/g, '-');
+      const product = { title, price, imgSrc };
 
-      let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-      const existingProduct = cart.find(item => item.id === productId);
-
-      if (existingProduct) {
-        existingProduct.quantity += 1;
-      } else {
-        const newProduct = {
-          id: productId,
-          name: title,
-          price: parseFloat(price.replace(/[^0-9.-]+/g, '')),
-          quantity: 1,
-          image: imgSrc
-        };
-        cart.push(newProduct);
-      }
-
+      // Añadir al carrito en localStorage
+      cart.push(product);
       localStorage.setItem("cartItems", JSON.stringify(cart));
 
       // Actualizar contador
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-      cartCount.textContent = totalItems;
+      cartCount.textContent = cart.length;
 
       // Redirigir a la página del carrito
       window.location.href = "cart.html";
