@@ -67,11 +67,17 @@ function renderCart() {
 
 // Función para actualizar el contador del carrito en la navegación
 function updateCartCount() {
-    const cart = getCart();
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    if (cartCountElement) {
-        cartCountElement.textContent = totalItems;
-    }
+  const cart = getCart();
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    const quantity = parseInt(item.quantity) || 1;
+    totalItems += quantity;
+  });
+
+  if (cartCountElement) {
+    cartCountElement.textContent = totalItems;
+  }
 }
 
 // Botón para vaciar el carrito
@@ -80,6 +86,10 @@ clearCartBtn.addEventListener('click', () => {
   renderCart();
   updateCartCount();
 
+  // 👇 Esta línea asegura que el contador se pone a cero aunque falle lo de arriba
+  if (cartCountElement) {
+    cartCountElement.textContent = '0';
+  }
 });
 
 // Mostrar carrito al cargar la página del carrito

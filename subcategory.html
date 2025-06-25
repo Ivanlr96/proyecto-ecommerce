@@ -272,39 +272,48 @@
     </section>
     </div>
     </footer>
-</body>
+
 <script src="src/main.js"></script>
 
   <!--carrito-->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-  const cartButtons = document.querySelectorAll(".add-to-cart");
-  const cartCount = document.getElementById("cart-count");
+    const cartButtons = document.querySelectorAll(".add-to-cart");
+    const cartCount = document.getElementById("cart-count");
 
-  // Inicializar contador desde localStorage
-  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-  cartCount.textContent = cart.length;
-
-  cartButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const productCard = button.closest(".product-card");
-      const title = productCard.querySelector("h4").innerText;
-      const price = productCard.querySelector(".price").innerText;
-      const imgSrc = productCard.querySelector("img").src;
-
-      const product = { title, price, imgSrc };
-
-      // Añadir al carrito en localStorage
-      cart.push(product);
-      localStorage.setItem("cartItems", JSON.stringify(cart));
-
-      // Actualizar contador
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
       cartCount.textContent = cart.length;
+    }
 
-      // Redirigir a la página del carrito
-      window.location.href = "cart.html";
+    // Inicializar contador
+    updateCartCount();
+
+    cartButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const productCard = button.closest(".product-card");
+        const title = productCard.querySelector("h4").innerText;
+        const price = productCard.querySelector(".price").innerText;
+        const imgSrc = productCard.querySelector("img").src;
+
+        const product = { title, price, imgSrc };
+
+        // Añadir al carrito
+        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        cart.push(product);
+        localStorage.setItem("cartItems", JSON.stringify(cart));
+
+        // Actualizar contador
+        updateCartCount();
+
+        // Redirigir a la página del carrito
+        window.location.href = "cart.html";
+      });
     });
+
+    // Detectar si otro script (como cart.html) ha vaciado el carrito
+    window.addEventListener("storage", updateCartCount);
   });
-});
 </script>
+</body>
 </html>
