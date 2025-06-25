@@ -1,0 +1,83 @@
+body {
+    background-color: rgb(251, 251, 247);
+    font-family: "Inter", sans-serif;
+    color:rgb(17, 17, 17);
+    margin: 0;
+    padding: 0;
+}
+/* nav-bar */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    height: 70px;
+    position: relative;
+    margin-bottom: 32px;
+}
+  
+.nav-left {
+    display: flex;
+    align-items: left;
+    gap: 1rem;
+}
+
+.nav-right {
+    display: flex;
+    align-items: right;
+    gap: 1rem;
+}
+  
+.logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+  
+.logo-container img {
+    width: 150px;
+    height: auto;
+}
+
+.fa-solid {
+    color:rgb(17, 17, 17);
+    font-size: 24px;
+}
+
+.fa-arrow-right {
+    color: rgb(251, 251, 247);
+}
+
+
+
+.search {
+    display: flex;
+    align-items: left;
+    gap: 1rem;
+}
+
+
+
+.menu-search{
+    padding: 15px;
+}
+
+
+.search-bar {
+  display: none; /* Initially hidden */
+  width: 0; /* Or some initial width you prefer */
+  /* Add your desired styling for the search bar (borders, padding, etc.) */
+  transition: width 0.3s ease-in-out; /* Smooth transition for width */
+  overflow: hidden; /* Hide overflowing text during transition */
+  margin-left: 10px; /* Space between icon and search bar */
+}
+
+.search-bar.active {
+  display: block; /* Make it visible when active */
+  width: 200px; /* Adjust to your desired open width */
+}
