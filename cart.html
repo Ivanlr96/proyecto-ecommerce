@@ -91,5 +91,18 @@
   </footer>
 
   <script src="cart.js"></script>
+
+  <!--añadir al carrito desde subcategory-->
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const cartCount = document.getElementById("cart-count");
+
+    if (cartCount) {
+      cartCount.textContent = cart.length;
+    }
+  });
+</script>
 </body>
 </html>

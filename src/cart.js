@@ -6,12 +6,12 @@ const cartCountElement = document.getElementById('cart-count'); // Para actualiz
 
 // Función para obtener el carrito del localStorage
 function getCart() {
-  return JSON.parse(localStorage.getItem('cart')) || [];
+  return JSON.parse(localStorage.getItem('cartItems')) || [];
 }
 
 // Función para guardar el carrito en el localStorage
 function saveCart(cart) {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem('cartItems', JSON.stringify(cart));
   updateCartCount(); // Actualizar el contador cada vez que se guarda el carrito
 }
 
@@ -76,8 +76,10 @@ function updateCartCount() {
 
 // Botón para vaciar el carrito
 clearCartBtn.addEventListener('click', () => {
-  localStorage.removeItem('cart');
+  localStorage.removeItem('cartItems');
   renderCart();
+  updateCartCount();
+
 });
 
 // Mostrar carrito al cargar la página del carrito

@@ -35,9 +35,10 @@
                 <button class="profile" aria-label="perfil">
                     <i class="fa-solid fa-user"></i>
                 </button>
-                <button class="cart" aria-label="cesta">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </button>
+                <a href="cart.html" class="cart" aria-label="cesta"><!--Añadido para el carrito-->
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <span id="cart-count">0</span><!--Añadido para el carrito-->
+                </a>
             </div>
         </nav>
     </header>
@@ -274,4 +275,54 @@
 </body>
 <script src="src/main.js"></script>
 
+  <!--carrito-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cartButtons = document.querySelectorAll(".add-to-cart");
+  const cartCount = document.getElementById("cart-count");
+
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  // Mostrar cantidad total
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartCount.textContent = totalItems;
+
+  cartButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const productCard = button.closest(".product-card");
+      const title = productCard.querySelector("h4").innerText;
+      const price = productCard.querySelector(".price").innerText;
+      const imgSrc = productCard.querySelector("img").src;
+
+      const productId = title.toLowerCase().replace(/\s+/g, '-');
+
+      let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+      const existingProduct = cart.find(item => item.id === productId);
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        const newProduct = {
+          id: productId,
+          name: title,
+          price: parseFloat(price.replace(/[^0-9.-]+/g, '')),
+          quantity: 1,
+          image: imgSrc
+        };
+        cart.push(newProduct);
+      }
+
+      localStorage.setItem("cartItems", JSON.stringify(cart));
+
+      // Actualizar contador
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = totalItems;
+
+      // Redirigir a la página del carrito
+      window.location.href = "cart.html";
+    });
+  });
+});
+</script>
 </html>
