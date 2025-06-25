@@ -58,9 +58,86 @@
       </aside>
       <main>
         <div class="image-container">
-            
+        </div>
+        <div class="text-content">
+            <div class="product-title">
+                <h3>Aquí va el nombre del producto</h3>
+            </div>
+            <div class="product-price">
+                <h4>40€</h4>
+            </div>
+            <select id="drop-down">
+                <option>Selecciona una talla</option>
+                <option>XS</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+            <div>
+                <button id="btn-add"></button>
+            </div>
         </div>
       </main>
+      <footer>
+        <div class="wrapper">
+          <!-- Newsletter -->
+          <section class="mailing-footer">
+            <form action="newsletter" method="POST" class="newsletter-form">
+              <p id="cta">
+                ¡Recibe 5€ para tu primera compra en Siroko! Suscríbete a nuestra newsletter y recibe nuestras promociones:
+              </p>
+              <div class="field-group">
+                <label for="mce-EMAIL" class="hide">Email</label>
+                <input
+                  type="email"
+                  name="EMAIL"
+                  placeholder="Escribe aquí tu email"
+                  class="email-input"
+                  required id="mce-EMAIL"/>
+
+                <div class="radio-group">
+                  <label for="mce-GENDER-female">
+                    <input type="radio" name="GENDER" required value="female" id="mce-GENDER-female" />
+                    Mujer
+                  </label>
+                  <label for="mce-GENDER-male">
+                    <input type="radio" name="GENDER" required value="male" id="mce-GENDER-male" />
+                    Hombre
+                  </label>
+                </div>
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn-subscribe">
+                  ENVIAR
+                </button>
+              </div>
+            </form>
+          </section>
+          <!-- Footer principal -->
+          <section class="footer-content">
+            <div class="logo-column">
+              <img src="./assets/logos/white-01.svg" alt="Logotipo versión negativo" class="footer-logotipo" />
+            </div>
+          
+            <div class="center-column">
+              <ul class="social-media-row">
+                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+              </ul>
+          
+              <ul class="legal-links">
+                <li><a href="#">Aviso legal</a></li>
+                <li><a href="#">Cookies</a></li>
+                <li><a href="#">Términos y condiciones</a></li>
+                <li><a href="#">Mapa web</a></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </footer>
     <script src="./src/product.js"></script>
 </body>
 </html>
