@@ -91,3 +91,96 @@ async function loadSubcategoriesMenu() {
   }
 }
 loadSubcategoriesMenu();
+
+//Dropdown y botón
+document.addEventListener('DOMContentLoaded', () => {
+    const customSelect = document.getElementById('customSelect');
+    const dropdownOptions = document.getElementById('dropdownOptions');
+    const textSelect = customSelect.querySelector('.text-select');
+    const btnAdd = document.getElementById('btn-add');
+    
+    let selectedValue = '';
+    let isOpen = false;
+
+    // Función para abrir/cerrar dropdown
+    function toggleDropdown() {
+        isOpen = !isOpen;
+        customSelect.classList.toggle('active', isOpen);
+        dropdownOptions.classList.toggle('show', isOpen);
+        
+        if (isOpen) {
+            // Focus en el dropdown para capturar eventos de teclado
+            customSelect.focus();
+        } else {
+            customSelect.blur();
+        }
+    }
+
+    // Función para cerrar dropdown
+    function closeDropdown() {
+        if (isOpen) {
+            isOpen = false;
+            customSelect.classList.remove('active');
+            dropdownOptions.classList.remove('show');
+        }
+    }
+
+    // Función para seleccionar opción
+    function selectOption(option) {
+        const value = option.getAttribute('data-value');
+        const text = option.textContent;
+        
+        // No seleccionar si es el placeholder
+        if (option.classList.contains('placeholder')) {
+            return;
+        }
+        
+        selectedValue = value;
+        textSelect.textContent = text;
+        
+        // Actualizar clases selected
+        document.querySelectorAll('.dropdown-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        option.classList.add('selected');
+        
+        closeDropdown();
+        
+        // Habilitar/deshabilitar botón
+        btnAdd.disabled = !selectedValue;
+    }
+
+    // Event listeners
+    customSelect.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleDropdown();
+    });
+
+    // Click en opciones
+    dropdownOptions.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const option = e.target.closest('.dropdown-option');
+        if (option) {
+            selectOption(option);
+        }
+    });
+
+    // Cerrar al hacer click fuera
+    document.addEventListener('click', (e) => {
+        if (!customSelect.contains(e.target) && !dropdownOptions.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+
+    // Funcionalidad del botón
+    btnAdd.addEventListener('click', () => {
+        if (selectedValue) {
+            alert(`Añadido al carrito: Talla ${selectedValue}`);
+        } else {
+            alert('Por favor, selecciona una talla');
+        }
+    });
+
+    // Estado inicial del botón
+    btnAdd.disabled = true;
+});
