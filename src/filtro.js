@@ -6,8 +6,21 @@ const title = document.getElementById("name");
 
 // Lee los parámetros de la URL
 const params = new URLSearchParams(window.location.search);
-const gender = params.get("gender") || params.get("category"); // 'woman' o 'man'
+const gender = params.get("gender") || params.get("category"); // 'mujer' o 'hombre'
 const subcategory = params.get("subcategory");
+
+let currentSort = null;
+
+// Escucha los cambios en los radios de orden
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('input[name="sort"]').forEach(radio => {
+        radio.addEventListener("change", (e) => {
+            currentSort = e.target.value;
+            getProducts();
+        });
+    });
+    getProducts();
+});
 
 async function getProducts() {
     const res = await fetch(API_URL);
@@ -31,9 +44,7 @@ async function getProducts() {
         // Obtener el nombre de la subcategoría
         const resCat = await fetch(API_URL2);
         const categories = await resCat.json();
-        // Busca la categoría correspondiente
         const categoryObj = categories.find(cat => String(cat.id) === genderId);
-        // Busca la subcategoría por id
         let subcatName = subcategory;
         if (categoryObj) {
             const subcatObj = categoryObj.subcategories.find(sub => String(sub.id) === subcategory);
@@ -42,6 +53,13 @@ async function getProducts() {
             }
         }
         title.textContent = `${subcatName} DE ${gender.toUpperCase()}`;
+    }
+
+    // Ordena por precio si hay sort seleccionado
+    if (currentSort === "low-to-high") {
+        filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (currentSort === "high-to-low") {
+        filteredProducts.sort((a, b) => b.price - a.price);
     }
 
     let html = "";
@@ -64,5 +82,3 @@ async function getProducts() {
 
     productsContainer.innerHTML = html;
 }
-
-getProducts();
