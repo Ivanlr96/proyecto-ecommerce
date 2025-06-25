@@ -22,16 +22,16 @@
         {
           "id": 101,
           "name": "Chaquetas",
-          "image": "./assets/fotos_hombre/sudaderas-hombre.webp"
+          "image": "./assets/fotos_hombre/chaquetas-hombre.webp"
         },
         {
           "id": 102,
           "name": "Sudaderas",
-          "image": "./assets/fotos_hombre/camisetas-hombre.webp"
+          "image": "./assets/fotos_hombre/sudaderas-hombre.webp"
         },
         {
           "id": 103,
-          "name": "Pantaloes",
+          "name": "Pantalones",
           "image": "./assets/fotos_hombre/pantalones-hombre.webp"
         },
         {
@@ -39,8 +39,14 @@
           "name": "Leggings",
           "image": "./assets/fotos_hombre/leggings-hombre.webp"
         },
-        {
+         {
           "id": 105,
+          "name": "Camisetas",
+          "image": "./assets/fotos_hombre/camisetas-hombre.webp"
+        },
+        
+        {
+          "id": 106,
           "name": "Accesorios",
           "image": "./assets/fotos_hombre/accesorios-hombre.webp"
         }
@@ -53,13 +59,14 @@
         {
           "id": 201,
           "name": "Chaquetas",
-          "image": "./assets/fotos_mujer/sudaderas.webp"
+          "image": "./assets/fotos_mujer/chaquetas.webp"
         },
         {
           "id": 202,
           "name": "Sudaderas",
-          "image": "./assets/fotos_mujer/camisetas.webp"
+          "image": "./assets/fotos_mujer/sudaderas.webp"
         },
+        
         {
           "id": 203,
           "name": "Pantalones",
@@ -70,8 +77,18 @@
           "name": "Leggings",
           "image": "./assets/fotos_mujer/leggings.webp"
         },
-        {
+         {
           "id": 205,
+          "name": "Camisetas",
+          "image": "./assets/fotos_mujer/camisetas.webp"
+        },
+          {
+          "id": 206,
+          "name": "Sujetadores Deportivos",
+          "image": "./assets/fotos_mujer/sujetadores.webp"
+        },
+        {
+          "id": 207,
           "name": "Accesorios",
           "image": "./assets/fotos_mujer/accesorios.webp"
         }
