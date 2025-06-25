@@ -10,36 +10,45 @@
 </head>
 
 <body>
-    <header>
+
         <nav class="main-nav">
-            <div class="nav-left">
-                <button id="menu-toggle" aria-label="abrir menú">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <div class="search">
-                    <button src="https://endlessicons.com/wp-content/uploads/2015/08/search-icon-2-614x460.png"
-                        class="menu-search" aria-label="buscador">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <i class="close-search-btn"></i>
-                    </button>
-                    <input type="text" class="search-bar" placeholder="Search...">
+            <div class="header-actions">
+            <button class="search-trigger" onclick="openSearch()">
+                🔍 Buscar
+            </button>
+            </div>
+
+     <!-- OVERLAY -->
+    <div class="search-overlay" onclick="closeSearch()"></div>
+
+    <!-- MODAL DE BÚSQUEDA -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-container">
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="¿Qué estás buscando?"
+                id="searchInput"
+                oninput="handleSearch(this.value)"
+            >
+            <button class="close-search" onclick="closeSearch()">✕</button>
+        </div>
+        
+        <div class="search-results" id="searchResults">
+            <div class="search-suggestions">
+                <div class="suggestions-title">Búsquedas populares</div>
+                <div class="suggestions-list">
+                    <span class="suggestion-tag" onclick="searchFor('vestidos')">Vestidos</span>
+                    <span class="suggestion-tag" onclick="searchFor('jeans')">Jeans</span>
+                    <span class="suggestion-tag" onclick="searchFor('camisetas')">Camisetas</span>
+                    <span class="suggestion-tag" onclick="searchFor('chaquetas')">Chaquetas</span>
+                    <span class="suggestion-tag" onclick="searchFor('zapatos')">Zapatos</span>
                 </div>
             </div>
-
-            <div class="logo-container">
-                <img src="./assets/logos/black-01.svg" alt="logotipo">
-            </div>
-
-            <div class="nav-right">
-                <button class="profile" aria-label="perfil">
-                    <i class="fa-solid fa-user"></i>
-                </button>
-                <button class="cart" aria-label="cesta">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
+            
+            <div id="resultsContainer"></div>
+        </div>
+    </div>
 
 <script src="search.js"></script>
 </body>
