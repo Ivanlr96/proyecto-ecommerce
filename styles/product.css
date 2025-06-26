@@ -470,3 +470,20 @@ footer {
   .legal-links a:hover {
     color:rgb(51, 51, 51);
   }
+
+
+.fa-cart-shopping + span {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  margin-left: 4px;
+}

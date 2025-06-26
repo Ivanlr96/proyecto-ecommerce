@@ -18,11 +18,7 @@ html, body {
     display: flex; 
 }
 
-.left-side {
-    flex: 1; 
-    background-color: #f0f0f0; 
-    min-width: 0; 
-}
+
 
 .right-side {
     flex: 1; 

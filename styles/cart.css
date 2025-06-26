@@ -1,26 +1,38 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    background-color: rgb(251, 251, 247);
-    font-family: "Inter", sans-serif;
-    color:rgb(17, 17, 17);
-    margin: 0;
-    padding: 0;
+  background-color: rgb(251, 251, 247);
+  font-family: "Inter", sans-serif;
+  color:rgb(17, 17, 17);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
 }
 
 h1 {
-    color: (rgb(251, 251, 247));
-    font-weight: 600;
-    margin-left: 24px;
-}
-
-h2 {
-    font-weight: 600;
-    margin-left: 24px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  
 }
 
 p {
-    color: (rgb(251, 251, 247));
-    font-weight: 400;
-    margin-left: 24px;
+  color: (rgb(17, 17, 17));
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 button {
@@ -132,69 +144,112 @@ button:hover {
     font-weight: 600;
   }
   
- 
+  /* contenido */
 
-  .text-content {
-    position: absolute;
-    top: 20%;
-    left: 24px;
-    transform: translateY(-20%);
-    z-index: 2;
-    color: rgb(251, 251, 247);
-    max-width: 300px;
-    text-align: left;
+  .cart-message {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    text-align: center;
   }
 
-  .btn-more {
-    background-color: rgb(17, 17, 17);
-    color:rgb(251, 251, 247);
-    border-radius: 50px;
-    border: none;
-    padding: 16px;
-    min-width: 160px;
+  .cart-summary{
+    display: flex;
+    justify-content: center;
     text-align: center;
     align-items: center;
-    font-weight: 600;
-    font-size: 20px;
-    margin-left: 20px;
-}
+  }
 
-.btn-more:hover {
-    background-color:rgb(51, 51, 51);
-    color: rgb(251, 251, 247);
-}
+  .hidden {
+    display: none;
+  }
 
-.carousel-block {
-    margin-top: 24px; 
-    margin-bottom: 36px;  
-}  
+  .amount.hidden {
+    display: none;
+  }
 
-.carousel-header {
+  .amount {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .btn-checkout {
+    font-weight: 500;
+    color: rgb(251, 251, 247);
+    background-color: rgb(17, 17, 17);
+    border-radius: 50px;
+    padding: 12px;
+    min-width: 150px;
+  }
+
+  .remove-item {
+    font-weight: 400;
+    color: rgb(17, 17, 17);
+    background-color: rgb(251, 251, 247);
+    border-radius: 50px;
+    border: solid 1px rgb(17, 17, 17);
+    padding: 8px;
+    min-width: 80px;
+  }
+
+  .cart-item {
+    display: flex;
     align-items: center;
-    margin-left: 24px;
-    margin-right: 24px;
-    margin-bottom: 16px;
-}
+    justify-content: flex-start;
+    gap: 30px;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    max-width: 300px;
+    margin: 0 auto;
+  }
   
-  .carousel-header h2 {
-    font-size: 24px;
-    font-weight: 700;
-}
+  .cart-image-container {
+    flex: 0 0 200px;
+    height: 200px;
+    border-radius: 16px;
+    position: relative;
+  }
+  
+  .cart-image {
+    position: absolute;    
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover; 
+    object-position: center;
+  }
+  
+  .cart-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 8px;
+    text-align: left;
+  }
+  
+  .item-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .item-price,
+  .item-quantity {
+    margin: 0;
+    font-size: 14px;
+  }
+  
 
+  /* footer */
 
-
-
-/* footer */
-
-footer {
+  footer {
     background-color: rgb(17, 17, 17);
     color: rgb(251, 251, 247);
     padding: 24px;
     margin-top: 40px;
+
   }
   
   .mailing-footer {
@@ -310,4 +365,26 @@ footer {
   min-width: 18px;
   text-align: center;
   line-height: 1.2;
+}
+
+#side-menu ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#side-menu ul li {
+  color: #111; 
+}
+
+#side-menu ul li a {
+  color: #111;        
+  text-decoration: none; 
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+#side-menu ul li a:hover {
+  color: #555; 
 }

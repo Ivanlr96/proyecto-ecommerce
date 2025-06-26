@@ -8,10 +8,9 @@
 
                     if (passwordInput.type === 'password') {
                         passwordInput.type = 'text';
-                        // Example: button.querySelector('svg').outerHTML = '<svg class="bi bi-eye-slash" ...>';
                     } else {
                         passwordInput.type = 'password';
-                        // Example: button.querySelector('svg').outerHTML = '<svg class="bi bi-eye" ...>';
+
                     }
                 });
             });
@@ -49,6 +48,9 @@ loginForm.addEventListener("submit", async (e) => {
     console.error(err);
     showError("Error al conectar con el servidor.");
   }
+
+
+  
 });
 
 function showError(message) {
@@ -62,3 +64,5 @@ function showError(message) {
   }
   error.textContent = message;
 }
+
+
