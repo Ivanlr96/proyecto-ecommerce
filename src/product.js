@@ -94,42 +94,105 @@ loadSubcategoriesMenu();
 
 //GET de los textos
 
-document.addEventListener("DOMContentLoaded", async() => {
+document.addEventListener("DOMContentLoaded", async () => {
+    // --- Cargar producto ---
+    const btnAdd = document.getElementById('btn-add');
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-    
+    let selectedValue = '';
+    let product = null;
+
+    // Dropdown
+    const customSelect = document.getElementById('customSelect');
+    const dropdownOptions = document.getElementById('dropdownOptions');
+    const textSelect = customSelect.querySelector('.text-select');
+
+    let isOpen = false;
+
+    function toggleDropdown() {
+        isOpen = !isOpen;
+        customSelect.classList.toggle('active', isOpen);
+        dropdownOptions.classList.toggle('show', isOpen);
+        if (isOpen) {
+            customSelect.focus();
+        } else {
+            customSelect.blur();
+        }
+    }
+    function closeDropdown() {
+        if (isOpen) {
+            isOpen = false;
+            customSelect.classList.remove('active');
+            dropdownOptions.classList.remove('show');
+        }
+    }
+    function selectOption(option) {
+        const value = option.getAttribute('data-value');
+        const text = option.textContent;
+        if (option.classList.contains('placeholder')) return;
+        selectedValue = value;
+        textSelect.textContent = text;
+        document.querySelectorAll('.dropdown-option').forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        closeDropdown();
+        btnAdd.disabled = !selectedValue;
+    }
+    customSelect.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleDropdown();
+    });
+    dropdownOptions.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const option = e.target.closest('.dropdown-option');
+        if (option) selectOption(option);
+    });
+    document.addEventListener('click', (e) => {
+        if (!customSelect.contains(e.target) && !dropdownOptions.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+    btnAdd.disabled = true;
+
+    // --- Cargar datos del producto ---
     if (!id) return;
     try {
         const res = await fetch(API_URL);
-        const products = await res.json()
+        const products = await res.json();
+        product = products.find(p => String(p.id) === id);
 
-        const product = products.find(p => String(p.id) === id);
-        
         if (product) {
             document.getElementById('product-image').src = product.image;
             document.getElementById('product-image').alt = product.name;
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-price').textContent = product.price + "€";
-            document.getElementById('product-description').textContent = product.description || ""; 
-
-
-            btnAdd.addEventListener("click", () => {
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                // Busca por id y talla
-                const existing = cart.find(item => item.id === product.id);
-                if (existing) {
-                    existing.quantity += 1;
-                } else {
-                    cart.push({ ...product, quantity: 1 });
-                }
-                localStorage.setItem('cart', JSON.stringify(cart));
-            });
+            document.getElementById('product-description').textContent = product.description || "";
         } else {
             document.getElementById('product-name').textContent = 'Producto no encontrado';
+            btnAdd.disabled = true;
         }
     } catch (error) {
-        console.error(error);
+        document.getElementById('product-name').textContent = 'Error al cargar el producto';
+        btnAdd.disabled = true;
     }
+
+    // --- Añadir al carrito con talla ---
+    btnAdd.addEventListener("click", () => {
+        if (!selectedValue) {
+            alert('Por favor, selecciona una talla');
+            return;
+        }
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Busca por id y talla
+        const existing = cart.find(item => item.id === product.id && item.size === selectedValue);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ ...product, quantity: 1, size: selectedValue });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Producto añadido al carrito');
+        // window.location.href = "cart.html"; // Descomenta si quieres redirigir
+    });
 });
 
 
