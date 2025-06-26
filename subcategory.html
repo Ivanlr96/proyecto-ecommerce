@@ -35,9 +35,9 @@
                 <button class="profile" aria-label="perfil">
                     <i class="fa-solid fa-user"></i>
                 </button>
-                <a href="cart.html" class="cart" aria-label="cesta"><!--Añadido para el carrito-->
+                <a href="cart.html" class="cart" aria-label="cesta">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cart-count">  </span><!--Añadido para el carrito-->
+                    <span id="cart-count">  </span>
                 </a>
             </div>
         </nav>
@@ -141,43 +141,5 @@
 
     <script src="./src/filtro.js"></script>
 </body>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cartButtons = document.querySelectorAll(".add-to-cart");
-    const cartCount = document.getElementById("cart-count");
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      // Suma cantidades si hay quantity, si no, cuenta elementos
-      let count = 0;
-      cart.forEach(item => {
-        count += item.quantity ? item.quantity : 1;
-      });
-      cartCount.textContent = count;
-    }
-    // Inicializar contador
-    updateCartCount();
-    cartButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const productCard = button.closest(".product-card");
-        const title = productCard.querySelector("h4").innerText;
-        const price = parseFloat(productCard.querySelector(".price").innerText.replace(/[^0-9.]/g, ""));
-        const imgSrc = productCard.querySelector("img").src;
-        const product = { name: title, price, image: imgSrc, quantity: 1 };
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        // Si ya existe, suma cantidad
-        const existing = cart.find(item => item.name === product.name && item.price === product.price);
-        if (existing) {
-          existing.quantity += 1;
-        } else {
-          cart.push(product);
-        }
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateCartCount();
-        window.location.href = "cart.html";
-      });
-    });
-    window.addEventListener("storage", updateCartCount);
-  });
-</script>
 
 </html>
