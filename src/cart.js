@@ -5,6 +5,18 @@ const sideMenu = document.getElementById('side-menu');
 const btnClose = document.getElementById('close-menu');
 const menuIcon = menuToggle.querySelector("i");
 
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let count = 0;
+  cart.forEach(item => {
+    count += item.quantity ? item.quantity : 1;
+  });
+  const cartCount = document.getElementById("cart-count");
+  if (cartCount) cartCount.textContent = count;
+}
+document.addEventListener("DOMContentLoaded", updateCartCount);
+window.addEventListener("storage", updateCartCount);
+
 //estas dos son las categorías sólo del menú
 const tabButtons = document.querySelectorAll('.gender-tabs .tab');
 const categories = document.querySelectorAll('.categories');
@@ -25,15 +37,18 @@ function toggleMenu() {
 }
 function openMenu() {
     sideMenu.classList.add("visible");
+    sideMenu.classList.remove("hidden");
     sideMenu.setAttribute("aria-hidden", "false");
-    sideMenu.classList.replace("fa-bars", "fa-xmark");
+    menuIcon.classList.replace("fa-bars", "fa-xmark");
     menuToggle.setAttribute("aria-label", "cerrar menú");
     loadSubcategoriesMenu();
 }
+
 function closeMenu() {
     sideMenu.classList.remove('visible');
+    sideMenu.classList.add('hidden');
     sideMenu.setAttribute("aria-hidden", "true");
-    sideMenu.classList.replace("fa-xmark", "fa-bars");
+    menuIcon.classList.replace("fa-xmark", "fa-bars");
     menuToggle.setAttribute("aria-label", "abrir menú");
 }
 function handleClickOutside(e) {
@@ -45,51 +60,49 @@ function handleClickOutside(e) {
 }
 tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const targetId = button.getAttribute("data-target");
-      tabButtons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-      categories.forEach((cat) => {
-        if (cat.id === targetId) {
-          cat.classList.remove("hidden");
-          cat.classList.add("active");
-        } else {
-          cat.classList.add("hidden");
-          cat.classList.remove("active");
-        }
-      });
+        const targetId = button.getAttribute("data-target");
+        tabButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+        categories.forEach((cat) => {
+            if (cat.id === targetId) {
+                cat.classList.remove("hidden");
+                cat.classList.add("active");
+            } else {
+                cat.classList.add("hidden");
+                cat.classList.remove("active");
+            }
+        });
     });
 });
 
 //GET subcategorías del menú
 async function loadSubcategoriesMenu() {
-  try {
-    const res = await fetch(API_URL2);
-    const categories = await res.json();
-    console.log(categories);
-    const womanList = document.querySelector("#mujer ul");
-    const manList = document.querySelector("#hombre ul");
-    womanList.innerHTML = "";
-    manList.innerHTML = "";
-    categories.forEach((category) => {
-      console.log(category.name)
-      category.subcategories.forEach((subcat) => {
-    
-        const li = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = `/subcategories/${subcat.id}`;
-        link.textContent = subcat.name;
-        li.appendChild(link);
-        if (category.name.toLowerCase() === "mujer") {
-          womanList.appendChild(li);
-        } else if (category.name.toLowerCase() === "hombre") {
-          manList.appendChild(li);
-        }
-      });
-    });
-  } catch (error) {
-    console.error(error);
-    alert("No se pudieron cargar las subcategorías ☹️");
-  }
+    try {
+        const res = await fetch(API_URL2);
+        const categories = await res.json();
+        console.log(categories);
+        const womanList = document.querySelector("#mujer ul");
+        const manList = document.querySelector("#hombre ul");
+        womanList.innerHTML = "";
+        manList.innerHTML = "";
+        categories.forEach((category) => {
+            category.subcategories.forEach((subcat) => {
+                const li = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = `/subcategories/${subcat.id}`;
+                link.textContent = subcat.name;
+                li.appendChild(link);
+                if (category.name.toLowerCase() === "mujer") {
+                    womanList.appendChild(li);
+                } else if (category.name.toLowerCase() === "hombre") {
+                    manList.appendChild(li);
+                }
+            });
+        });
+    } catch (error) {
+        console.error(error);
+        alert("No se pudieron cargar las subcategorías ☹️");
+    }
 }
 loadSubcategoriesMenu();
 

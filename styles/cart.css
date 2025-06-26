@@ -1,3 +1,9 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: rgb(251, 251, 247);
   font-family: "Inter", sans-serif;
@@ -5,6 +11,12 @@ body {
   margin: 0;
   padding: 0;
   text-align: left;
+    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
 }
 
 h1 {
@@ -237,6 +249,7 @@ button:hover {
     color: rgb(251, 251, 247);
     padding: 24px;
     margin-top: 40px;
+
   }
   
   .mailing-footer {
@@ -352,4 +365,26 @@ button:hover {
   min-width: 18px;
   text-align: center;
   line-height: 1.2;
+}
+
+#side-menu ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#side-menu ul li {
+  color: #111; 
+}
+
+#side-menu ul li a {
+  color: #111;        
+  text-decoration: none; 
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+#side-menu ul li a:hover {
+  color: #555; 
 }
