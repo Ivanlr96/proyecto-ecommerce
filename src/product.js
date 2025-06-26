@@ -6,6 +6,18 @@ const sideMenu = document.getElementById('side-menu');
 const btnClose = document.getElementById('close-menu');
 const menuIcon = menuToggle.querySelector("i");
 
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let count = 0;
+  cart.forEach(item => {
+    count += item.quantity ? item.quantity : 1;
+  });
+  const cartCount = document.getElementById("cart-count");
+  if (cartCount) cartCount.textContent = count;
+}
+document.addEventListener("DOMContentLoaded", updateCartCount);
+window.addEventListener("storage", updateCartCount);
+
 //estas dos son las categorías sólo del menú
 const tabButtons = document.querySelectorAll('.gender-tabs .tab');
 const categories = document.querySelectorAll('.categories');
@@ -46,49 +58,49 @@ function handleClickOutside(e) {
 }
 tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const targetId = button.getAttribute("data-target");
-      tabButtons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-      categories.forEach((cat) => {
-        if (cat.id === targetId) {
-          cat.classList.remove("hidden");
-          cat.classList.add("active");
-        } else {
-          cat.classList.add("hidden");
-          cat.classList.remove("active");
-        }
-      });
+        const targetId = button.getAttribute("data-target");
+        tabButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+        categories.forEach((cat) => {
+            if (cat.id === targetId) {
+                cat.classList.remove("hidden");
+                cat.classList.add("active");
+            } else {
+                cat.classList.add("hidden");
+                cat.classList.remove("active");
+            }
+        });
     });
 });
 
 //GET subcategorías del menú
 async function loadSubcategoriesMenu() {
-  try {
-    const res = await fetch(API_URL2);
-    const categories = await res.json();
-    console.log(categories);
-    const womanList = document.querySelector("#woman ul");
-    const manList = document.querySelector("#man ul");
-    womanList.innerHTML = "";
-    manList.innerHTML = "";
-    categories.forEach((category) => {
-      category.subcategories.forEach((subcat) => {
-        const li = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = `/subcategories/${subcat.id}`;
-        link.textContent = subcat.name;
-        li.appendChild(link);
-        if (category.name.toLowerCase() === "woman") {
-          womanList.appendChild(li);
-        } else if (category.name.toLowerCase() === "man") {
-          manList.appendChild(li);
-        }
-      });
-    });
-  } catch (error) {
-    console.error(error);
-    alert("No se pudieron cargar las subcategorías ☹️");
-  }
+    try {
+        const res = await fetch(API_URL2);
+        const categories = await res.json();
+        console.log(categories);
+        const womanList = document.querySelector("#mujer ul");
+        const manList = document.querySelector("#hombre ul");
+        womanList.innerHTML = "";
+        manList.innerHTML = "";
+        categories.forEach((category) => {
+            category.subcategories.forEach((subcat) => {
+                const li = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = `/subcategories/${subcat.id}`;
+                link.textContent = subcat.name;
+                li.appendChild(link);
+                if (category.name.toLowerCase() === "mujer") {
+                    womanList.appendChild(li);
+                } else if (category.name.toLowerCase() === "hombre") {
+                    manList.appendChild(li);
+                }
+            });
+        });
+    } catch (error) {
+        console.error(error);
+        alert("No se pudieron cargar las subcategorías ☹️");
+    }
 }
 loadSubcategoriesMenu();
 
@@ -191,7 +203,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         localStorage.setItem('cart', JSON.stringify(cart));
         alert('Producto añadido al carrito');
-        // window.location.href = "cart.html"; // Descomenta si quieres redirigir
+         window.location.href = "cart.html"; 
     });
 });
 
@@ -201,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdownOptions = document.getElementById('dropdownOptions');
     const textSelect = customSelect.querySelector('.text-select');
     const btnAdd = document.getElementById('btn-add');
-    
+
     let selectedValue = '';
     let isOpen = false;
 
@@ -210,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isOpen = !isOpen;
         customSelect.classList.toggle('active', isOpen);
         dropdownOptions.classList.toggle('show', isOpen);
-        
+
         if (isOpen) {
             // Focus en el dropdown para capturar eventos de teclado
             customSelect.focus();
@@ -232,23 +244,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function selectOption(option) {
         const value = option.getAttribute('data-value');
         const text = option.textContent;
-        
+
         // No seleccionar si es el placeholder
         if (option.classList.contains('placeholder')) {
             return;
         }
-        
+
         selectedValue = value;
         textSelect.textContent = text;
-        
+
         // Actualizar clases selected
         document.querySelectorAll('.dropdown-option').forEach(opt => {
             opt.classList.remove('selected');
         });
         option.classList.add('selected');
-        
+
         closeDropdown();
-        
+
         // Habilitar/deshabilitar botón
         btnAdd.disabled = !selectedValue;
     }
@@ -276,13 +288,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Funcionalidad del botón
-   // btnAdd.addEventListener('click', () => {
-     //   if (selectedValue) {
-       //     alert(`Añadido al carrito: Talla ${selectedValue}`);
-       // } else {
-        //    alert('Por favor, selecciona una talla');
-        //}
-   // });
+    // btnAdd.addEventListener('click', () => {
+    //   if (selectedValue) {
+    //     alert(`Añadido al carrito: Talla ${selectedValue}`);
+    // } else {
+    //    alert('Por favor, selecciona una talla');
+    //}
+    // });
 
     // Estado inicial del botón
     btnAdd.disabled = true;

@@ -1,165 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/product.css">
-    <title>Product</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./styles/product.css">
+  <title>Product</title>
 </head>
+
 <body>
-    <header>
-        <nav class="main-nav">
-          <div class="nav-left">
-            <button id="menu-toggle" aria-label="abrir menú">
-              <i class="fa-solid fa-bars"></i>
-            </button>
-            <button class="search" aria-label="buscador">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
+  <header>
+    <nav class="main-nav">
+      <div class="nav-left">
+        <button id="menu-toggle" aria-label="abrir menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <button class="search" aria-label="buscador">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+
+      <div class="logo-container">
+        <img src="./assets/logos/black-01.svg" alt="logotipo">
+      </div>
+
+      <div class="nav-right">
+        <button class="profile" aria-label="perfil">
+          <i class="fa-solid fa-user"></i>
+        </button>
+   <a href="cart.html" class="cart" aria-label="cesta">
+  <button id="cart-button" class="cart" aria-label="cesta">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="cart-count">0</span>
+  </button>
+</a>
+        </a>
+      </div>
+    </nav>
+  </header>
+  <aside id="side-menu" class="hidden" aria-hidden="true">
+    <button id="close-menu" aria-label="cerrar menú">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <!--Categorías-->
+    <nav class="gender-tabs">
+      <button class="tab active" data-target="mujer">MUJER</button>
+      <button class="tab" data-target="hombre">HOMBRE</button>
+    </nav>
+    <!--Subcategorías mujer-->
+    <div id="mujer" class="categories active">
+      <ul>
+      </ul>
+    </div>
+    <!--Subcategorías hombre-->
+    <div id="hombre" class="categories categories hidden">
+      <ul>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <div class="content">
+      <div class="image-container">
+        <img class="photo" id="product-image">
+      </div>
+      <div class="text-content">
+        <div class="text-items">
+          <div class="product-title">
+            <h3 id="product-name"></h3>
           </div>
-        
-          <div class="logo-container">
-            <img src="./assets/logos/black-01.svg" alt="logotipo">
+          <div class="product-price">
+            <h4 id="product-price"></h4>
           </div>
-        
-          <div class="nav-right">
-            <button class="profile" aria-label="perfil">
-              <i class="fa-solid fa-user"></i>
-            </button>
-            <button class="cart" aria-label="cesta">
-          <a href="cart.html" class="cart" aria-label="cesta">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cart-count">  </span>
-                </a>
-            </button>
+          <div class="description">
+            <p id="product-description"></p>
           </div>
-        </nav>      
-      </header>
-      <aside id="side-menu" class="hidden" aria-hidden="true">
-          <button id="close-menu" aria-label="cerrar menú">
-              <i class="fa-solid fa-xmark"></i>
-          </button>
-          <!--Categorías-->
-          <nav class="gender-tabs">
-              <button class="tab active" data-target="woman">MUJER</button>
-              <button class="tab" data-target="man">HOMBRE</button>
-          </nav>
-          <!--Subcategorías mujer-->
-          <div id="woman" class="categories active">
-              <ul>
-              </ul>
-          </div>
-          <!--Subcategorías hombre-->
-          <div id="man" class="categories categories hidden">
-              <ul>
-              </ul>
-          </div>
-      </aside>
-      <main>
-        <div class="content">
-        <div class="image-container">
-          <img class="photo" id="product-image">
         </div>
-        <div class="text-content">
-          <div class="text-items">
-            <div class="product-title">
-                <h3 id="product-name"></h3>
+        <div class="form-container">
+          <div class="select-container">
+            <div class="custom-select" id="customSelect">
+              <span class="text-select">Selecciona una talla</span>
+              <i class="fa-solid fa-circle-chevron-down"></i>
             </div>
-            <div class="product-price">
-                <h4 id="product-price"></h4>
+            <div class="dropdown-options" id="dropdownOptions">
+              <div class="dropdown-option placeholder" data-value="">Selecciona una talla</div>
+              <div class="dropdown-option" data-value="XS">XS</div>
+              <div class="dropdown-option" data-value="S">S</div>
+              <div class="dropdown-option" data-value="M">M</div>
+              <div class="dropdown-option" data-value="L">L</div>
+              <div class="dropdown-option" data-value="XL">XL</div>
             </div>
-            <div class="description">
-                <p id="product-description"></p>
-            </div>
-            </div>
-            <div class="form-container">
-                <div class="select-container">
-                    <div class="custom-select" id="customSelect">
-                        <span class="text-select">Selecciona una talla</span>
-                        <i class="fa-solid fa-circle-chevron-down"></i>
-                    </div>
-                    <div class="dropdown-options" id="dropdownOptions">
-                        <div class="dropdown-option placeholder" data-value="">Selecciona una talla</div>
-                        <div class="dropdown-option" data-value="XS">XS</div>
-                        <div class="dropdown-option" data-value="S">S</div>
-                        <div class="dropdown-option" data-value="M">M</div>
-                        <div class="dropdown-option" data-value="L">L</div>
-                        <div class="dropdown-option" data-value="XL">XL</div>
-                    </div>
-                </div>
-                <div>
-                    <button id="btn-add">
-                        AÑADIR AL CARRITO
-                    </button>
-                </div>
-            </div>
+          </div>
+          <div>
+            <button id="btn-add">
+              AÑADIR AL CARRITO
+            </button>
+          </div>
         </div>
       </div>
-      </main>
-      <footer>
-        <div class="wrapper">
-          <!-- Newsletter -->
-          <section class="mailing-footer">
-            <form action="newsletter" method="POST" class="newsletter-form">
-              <p id="cta">
-                ¡Recibe 5€ para tu primera compra en Siroko! Suscríbete a nuestra newsletter y recibe nuestras promociones:
-              </p>
-              <div class="field-group">
-                <label for="mce-EMAIL" class="hide">Email</label>
-                <input
-                  type="email"
-                  name="EMAIL"
-                  placeholder="Escribe aquí tu email"
-                  class="email-input"
-                  required id="mce-EMAIL"/>
+    </div>
+  </main>
+  <footer>
+    <div class="wrapper">
+      <!-- Newsletter -->
+      <section class="mailing-footer">
+        <form action="newsletter" method="POST" class="newsletter-form">
+          <p id="cta">
+            ¡Recibe 5€ para tu primera compra en Siroko! Suscríbete a nuestra newsletter y recibe nuestras promociones:
+          </p>
+          <div class="field-group">
+            <label for="mce-EMAIL" class="hide">Email</label>
+            <input type="email" name="EMAIL" placeholder="Escribe aquí tu email" class="email-input" required
+              id="mce-EMAIL" />
 
-                <div class="radio-group">
-                  <label for="mce-GENDER-female">
-                    <input type="radio" name="GENDER" required value="female" id="mce-GENDER-female" />
-                    Mujer
-                  </label>
-                  <label for="mce-GENDER-male">
-                    <input type="radio" name="GENDER" required value="male" id="mce-GENDER-male" />
-                    Hombre
-                  </label>
-                </div>
-                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn-subscribe">
-                  ENVIAR
-                </button>
-              </div>
-            </form>
-          </section>
-          <!-- Footer principal -->
-          <section class="footer-content">
-            <div class="logo-column">
-              <img src="./assets/logos/white-01.svg" alt="Logotipo versión negativo" class="footer-logotipo" />
+            <div class="radio-group">
+              <label for="mce-GENDER-female">
+                <input type="radio" name="GENDER" required value="female" id="mce-GENDER-female" />
+                Mujer
+              </label>
+              <label for="mce-GENDER-male">
+                <input type="radio" name="GENDER" required value="male" id="mce-GENDER-male" />
+                Hombre
+              </label>
             </div>
-          
-            <div class="center-column">
-              <ul class="social-media-row">
-                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
-              </ul>
-          
-              <ul class="legal-links">
-                <li><a href="#">Aviso legal</a></li>
-                <li><a href="#">Cookies</a></li>
-                <li><a href="#">Términos y condiciones</a></li>
-                <li><a href="#">Mapa web</a></li>
-              </ul>
-            </div>
-          </section>
+            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn-subscribe">
+              ENVIAR
+            </button>
+          </div>
+        </form>
+      </section>
+      <!-- Footer principal -->
+      <section class="footer-content">
+        <div class="logo-column">
+          <img src="./assets/logos/white-01.svg" alt="Logotipo versión negativo" class="footer-logotipo" />
         </div>
-      </footer>
-    <script src="./src/product.js"></script>
-    
+
+        <div class="center-column">
+          <ul class="social-media-row">
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+          </ul>
+
+          <ul class="legal-links">
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">Términos y condiciones</a></li>
+            <li><a href="#">Mapa web</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </footer>
+  <script src="./src/product.js"></script>
+
 </body>
+
 </html>
