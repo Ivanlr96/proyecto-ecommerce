@@ -92,6 +92,58 @@ async function loadSubcategoriesMenu() {
 }
 loadSubcategoriesMenu();
 
+//GET de los textos
+
+document.addEventListener("DOMContentLoaded", async() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    
+    if (!id) return;
+    try {
+        const res = await fetch(API_URL);
+        const products = await res.json()
+
+        const product = products.find(p => String(p.id) === id);
+        
+        if (product) {
+            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-image').alt = product.name;
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-price').textContent = product.price + "€";
+            document.getElementById('product-description').textContent = product.description || ""; 
+
+
+            btnAdd.addEventListener("click", () => {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                // Busca por id y talla
+                const existing = cart.find(item => item.id === product.id);
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+            });
+        } else {
+            document.getElementById('product-name').textContent = 'Producto no encontrado';
+        }
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Dropdown y botón
 document.addEventListener('DOMContentLoaded', () => {
     const customSelect = document.getElementById('customSelect');
@@ -173,13 +225,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Funcionalidad del botón
-    btnAdd.addEventListener('click', () => {
-        if (selectedValue) {
-            alert(`Añadido al carrito: Talla ${selectedValue}`);
-        } else {
-            alert('Por favor, selecciona una talla');
-        }
-    });
+   // btnAdd.addEventListener('click', () => {
+     //   if (selectedValue) {
+       //     alert(`Añadido al carrito: Talla ${selectedValue}`);
+       // } else {
+        //    alert('Por favor, selecciona una talla');
+        //}
+   // });
 
     // Estado inicial del botón
     btnAdd.disabled = true;
