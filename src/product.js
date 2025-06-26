@@ -113,11 +113,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const id = params.get("id");
     let selectedValue = '';
     let product = null;
-
+    
     // Dropdown
     const customSelect = document.getElementById('customSelect');
     const dropdownOptions = document.getElementById('dropdownOptions');
     const textSelect = customSelect.querySelector('.text-select');
+    
 
     let isOpen = false;
 
@@ -147,7 +148,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelectorAll('.dropdown-option').forEach(opt => opt.classList.remove('selected'));
         option.classList.add('selected');
         closeDropdown();
-        btnAdd.disabled = !selectedValue;
+     btnAdd.disabled = false;
     }
     customSelect.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -184,15 +185,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     } catch (error) {
         document.getElementById('product-name').textContent = 'Error al cargar el producto';
-        btnAdd.disabled = true;
+
     }
+
+        btnAdd.disabled = false;
 
     // --- Añadir al carrito con talla ---
     btnAdd.addEventListener("click", () => {
         if (!selectedValue) {
-            alert('Por favor, selecciona una talla');
-            return;
-        }
+        alert('Por favor, selecciona una talla');
+        return;
+    }
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         // Busca por id y talla
         const existing = cart.find(item => item.id === product.id && item.size === selectedValue);
@@ -207,95 +210,95 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 });
 
-//Dropdown y botón
-document.addEventListener('DOMContentLoaded', () => {
-    const customSelect = document.getElementById('customSelect');
-    const dropdownOptions = document.getElementById('dropdownOptions');
-    const textSelect = customSelect.querySelector('.text-select');
-    const btnAdd = document.getElementById('btn-add');
+// //Dropdown y botón
+// document.addEventListener('DOMContentLoaded', () => {
+//     const customSelect = document.getElementById('customSelect');
+//     const dropdownOptions = document.getElementById('dropdownOptions');
+//     const textSelect = customSelect.querySelector('.text-select');
+//     const btnAdd = document.getElementById('btn-add');
 
-    let selectedValue = '';
-    let isOpen = false;
+//     let selectedValue = '';
+//     let isOpen = false;
 
-    // Función para abrir/cerrar dropdown
-    function toggleDropdown() {
-        isOpen = !isOpen;
-        customSelect.classList.toggle('active', isOpen);
-        dropdownOptions.classList.toggle('show', isOpen);
+//     // Función para abrir/cerrar dropdown
+//     function toggleDropdown() {
+//         isOpen = !isOpen;
+//         customSelect.classList.toggle('active', isOpen);
+//         dropdownOptions.classList.toggle('show', isOpen);
 
-        if (isOpen) {
-            // Focus en el dropdown para capturar eventos de teclado
-            customSelect.focus();
-        } else {
-            customSelect.blur();
-        }
-    }
+//         if (isOpen) {
+//             // Focus en el dropdown para capturar eventos de teclado
+//             customSelect.focus();
+//         } else {
+//             customSelect.blur();
+//         }
+//     }
 
-    // Función para cerrar dropdown
-    function closeDropdown() {
-        if (isOpen) {
-            isOpen = false;
-            customSelect.classList.remove('active');
-            dropdownOptions.classList.remove('show');
-        }
-    }
+//     // Función para cerrar dropdown
+//     function closeDropdown() {
+//         if (isOpen) {
+//             isOpen = false;
+//             customSelect.classList.remove('active');
+//             dropdownOptions.classList.remove('show');
+//         }
+//     }
 
-    // Función para seleccionar opción
-    function selectOption(option) {
-        const value = option.getAttribute('data-value');
-        const text = option.textContent;
+//     // Función para seleccionar opción
+//     function selectOption(option) {
+//         const value = option.getAttribute('data-value');
+//         const text = option.textContent;
 
-        // No seleccionar si es el placeholder
-        if (option.classList.contains('placeholder')) {
-            return;
-        }
+//         // No seleccionar si es el placeholder
+//         if (option.classList.contains('placeholder')) {
+//             return;
+//         }
 
-        selectedValue = value;
-        textSelect.textContent = text;
+//         selectedValue = value;
+//         textSelect.textContent = text;
 
-        // Actualizar clases selected
-        document.querySelectorAll('.dropdown-option').forEach(opt => {
-            opt.classList.remove('selected');
-        });
-        option.classList.add('selected');
+//         // Actualizar clases selected
+//         document.querySelectorAll('.dropdown-option').forEach(opt => {
+//             opt.classList.remove('selected');
+//         });
+//         option.classList.add('selected');
 
-        closeDropdown();
+//         closeDropdown();
 
-        // Habilitar/deshabilitar botón
-        btnAdd.disabled = !selectedValue;
-    }
+//         // Habilitar/deshabilitar botón
+//         btnAdd.disabled = !selectedValue;
+//     }
 
-    // Event listeners
-    customSelect.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleDropdown();
-    });
+//     // Event listeners
+//     customSelect.addEventListener('click', (e) => {
+//         e.stopPropagation();
+//         toggleDropdown();
+//     });
 
-    // Click en opciones
-    dropdownOptions.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const option = e.target.closest('.dropdown-option');
-        if (option) {
-            selectOption(option);
-        }
-    });
+//     // Click en opciones
+//     dropdownOptions.addEventListener('click', (e) => {
+//         e.stopPropagation();
+//         const option = e.target.closest('.dropdown-option');
+//         if (option) {
+//             selectOption(option);
+//         }
+//     });
 
-    // Cerrar al hacer click fuera
-    document.addEventListener('click', (e) => {
-        if (!customSelect.contains(e.target) && !dropdownOptions.contains(e.target)) {
-            closeDropdown();
-        }
-    });
+//     // Cerrar al hacer click fuera
+//     document.addEventListener('click', (e) => {
+//         if (!customSelect.contains(e.target) && !dropdownOptions.contains(e.target)) {
+//             closeDropdown();
+//         }
+//     });
 
-    // Funcionalidad del botón
-    // btnAdd.addEventListener('click', () => {
-    //   if (selectedValue) {
-    //     alert(`Añadido al carrito: Talla ${selectedValue}`);
-    // } else {
-    //    alert('Por favor, selecciona una talla');
-    //}
-    // });
+//     // Funcionalidad del botón
+//     // btnAdd.addEventListener('click', () => {
+//     //   if (selectedValue) {
+//     //     alert(`Añadido al carrito: Talla ${selectedValue}`);
+//     // } else {
+//     //    alert('Por favor, selecciona una talla');
+//     //}
+//     // });
 
-    // Estado inicial del botón
-    btnAdd.disabled = true;
-});
+//     // Estado inicial del botón
+//     btnAdd.disabled = true;
+// });
