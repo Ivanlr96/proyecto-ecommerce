@@ -93,7 +93,6 @@ button:hover {
     z-index: 9999;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
   }
   
   #side-menu.visible {
@@ -166,14 +165,36 @@ button:hover {
   /* Contenido*/
 
   .image-container {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    height: 760px;
     width: 580px;
-    height: 860px;
+    border-radius: 16px;  
+    overflow: hidden;
+    flex: 0 0 auto;
+    display:flex;
+    align-items: flex-end;
+    justify-content: center;
     margin-left: 24px;
   }
 
+  .photo { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover; 
+    object-position: center;
+    z-index: 1;
+
+  }
+
+  .text-content {
+    position: relative;
+    height: 760px;
+    width: 580px;
+    
+  }
 
   .select-container {
     position: relative;
