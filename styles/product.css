@@ -472,15 +472,18 @@ footer {
   }
 
 
-  .fa-cart-shopping + span {
+.fa-cart-shopping + span {
   background-color: red;
   color: white;
   font-size: 12px;
   font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 999px;
-  display: inline-block;
-  min-width: 18px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  line-height: 1.2;
+  line-height: 1;
+  margin-left: 4px;
 }
