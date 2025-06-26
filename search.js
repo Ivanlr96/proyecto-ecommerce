@@ -227,12 +227,14 @@ function handleSearch(query) {
 // REALIZAR BÚSQUEDA
 function performSearch(query) {
     const resultsContainer = document.getElementById('resultsContainer');
-    const lowerCaseQuery = query.toLowerCase();
+     const searchTerms = query.toLowerCase().split(' ').filter(term => term.trim() !== ''); // Limpiamos espacios vacíos
     
+    // 2. Filtramos los elementos
     const results = searchableItems.filter(item => {
-        // Ahora buscamos directamente en la propiedad 'searchableText' que creamos.
-        // Esto simplifica la lógica aquí, ya que 'searchableText' contiene todos los campos relevantes.
-        return item.searchableText.includes(lowerCaseQuery);
+        // Para cada elemento, comprobamos si INCLUYE CADA UNO de los términos de búsqueda
+        // La función 'every' asegura que TODAS las palabras del array 'searchTerms' estén presentes
+        // en 'item.searchableText'.
+        return searchTerms.every(term => item.searchableText.includes(term));
     });
     
     if (results.length > 0) {
