@@ -1,11 +1,18 @@
  
+
 body {
     background-color: rgb(251, 251, 247);
     font-family: "Inter", sans-serif;
     color: rgb(17, 17, 17);
     margin: 0;
-    padding: 0 3rem;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
+main {
+    flex: 1;
 }
 
 button {
@@ -169,7 +176,11 @@ footer {
     color: rgb(251, 251, 247);
     padding: 24px;
     margin-top: 40px;
-    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+  
+    box-sizing: border-box;
 }
 
 .mailing-footer {
