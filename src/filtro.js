@@ -62,9 +62,9 @@ async function getProducts() {
         filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-let html = "";
-filteredProducts.forEach(product => {
-    html += `
+    let html = "";
+    filteredProducts.forEach(product => {
+        html += `
         <article class="product-card">
             <div class="product-image">
                 <img src="${product.image}" alt="${product.name}">
@@ -73,33 +73,35 @@ filteredProducts.forEach(product => {
                 </button>
             </div>
             <div class="product-details">
-                <h4>${product.name}</h4>
+           <h4>
+                <a href="product.html?id=${product.id}" class="product-link">${product.name}</a>
+            </h4>
                 <p class="price">${product.price}€</p>
             </div>
         </article>
     `;
-});
-productsContainer.innerHTML = html;
-
-// Añade listeners a los botones de añadir al carrito
-document.querySelectorAll('.add-to-cart').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const id = btn.getAttribute('data-id');
-        const prod = filteredProducts.find(p => String(p.id) === id);
-        addToCart(prod);
     });
-});
+    productsContainer.innerHTML = html;
 
-// Función para añadir al carrito en localStorage
-function addToCart(product) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existing = cart.find(item => item.id === product.id);
-    if (existing) {
-        existing.quantity += 1;
-    } else {
-        cart.push({ ...product, quantity: 1 });
+    // Añade listeners a los botones de añadir al carrito
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = btn.getAttribute('data-id');
+            const prod = filteredProducts.find(p => String(p.id) === id);
+            addToCart(prod);
+        });
+    });
+
+    // Función para añadir al carrito en localStorage
+    function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existing = cart.find(item => item.id === product.id);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Producto añadido al carrito');
     }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Producto añadido al carrito');
-}
 }
