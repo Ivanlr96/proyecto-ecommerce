@@ -1,16 +1,16 @@
 {
   "name": "proyecto-ecommerce",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-      "api": "json-server --watch server/db.json --port 3000"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "express": "^4.18.2",
     "json-server": "^1.0.0-beta.3"
   }
 }
