@@ -165,6 +165,16 @@ button:hover {
 
   /* Contenido*/
 
+  .image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 580px;
+    height: 860px;
+    margin-left: 24px;
+  }
+
+
   .select-container {
     position: relative;
     margin-bottom: 20px;    
@@ -247,10 +257,6 @@ button:hover {
 
 .dropdown-option:last-child {
     border-bottom: none;
-}
-
-.dropdown-option:hover {
-    background-color: rgb(240, 240, 236);
 }
 
 .dropdown-option.selected:hover {
