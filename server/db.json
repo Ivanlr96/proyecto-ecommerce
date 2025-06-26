@@ -9,7 +9,8 @@
     },
     {
       "id": "2",
-      "username": "user",
+      "name": "user",
+      "email": "user1@user.com",
       "password": "user123",
       "role": "user"
     }
@@ -39,12 +40,11 @@
           "name": "Leggings",
           "image": "./assets/fotos_hombre/leggings-hombre.webp"
         },
-         {
+        {
           "id": 105,
           "name": "Camisetas",
           "image": "./assets/fotos_hombre/camisetas-hombre.webp"
         },
-        
         {
           "id": 106,
           "name": "Accesorios",
@@ -66,7 +66,6 @@
           "name": "Sudaderas",
           "image": "./assets/fotos_mujer/sudaderas.webp"
         },
-        
         {
           "id": 203,
           "name": "Pantalones",
@@ -77,12 +76,12 @@
           "name": "Leggings",
           "image": "./assets/fotos_mujer/leggings.webp"
         },
-         {
+        {
           "id": 205,
           "name": "Camisetas",
           "image": "./assets/fotos_mujer/camisetas.webp"
         },
-          {
+        {
           "id": 206,
           "name": "Sujetadores Deportivos",
           "image": "./assets/fotos_mujer/sujetadores.webp"
