@@ -1,26 +1,26 @@
 body {
-    background-color: rgb(251, 251, 247);
-    font-family: "Inter", sans-serif;
-    color:rgb(17, 17, 17);
-    margin: 0;
-    padding: 0;
+  background-color: rgb(251, 251, 247);
+  font-family: "Inter", sans-serif;
+  color:rgb(17, 17, 17);
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 h1 {
-    color: (rgb(251, 251, 247));
-    font-weight: 600;
-    margin-left: 24px;
-}
-
-h2 {
-    font-weight: 600;
-    margin-left: 24px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  
 }
 
 p {
-    color: (rgb(251, 251, 247));
-    font-weight: 400;
-    margin-left: 24px;
+  color: (rgb(17, 17, 17));
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 button {
@@ -132,65 +132,62 @@ button:hover {
     font-weight: 600;
   }
   
- 
+  /* contenido */
 
-  .text-content {
-    position: absolute;
-    top: 20%;
-    left: 24px;
-    transform: translateY(-20%);
-    z-index: 2;
-    color: rgb(251, 251, 247);
-    max-width: 300px;
-    text-align: left;
+  .cart-message {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    text-align: center;
   }
 
-  .btn-more {
-    background-color: rgb(17, 17, 17);
-    color:rgb(251, 251, 247);
-    border-radius: 50px;
-    border: none;
-    padding: 16px;
-    min-width: 160px;
-    text-align: center;
-    align-items: center;
-    font-weight: 600;
-    font-size: 20px;
-    margin-left: 20px;
-}
-
-.btn-more:hover {
-    background-color:rgb(51, 51, 51);
-    color: rgb(251, 251, 247);
-}
-
-.carousel-block {
-    margin-top: 24px; 
-    margin-bottom: 36px;  
-}  
-
-.carousel-header {
+  .cart-summary{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 24px;
-    margin-right: 24px;
-    margin-bottom: 16px;
-}
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .amount.hidden {
+    display: none;
+  }
+
+  .amount {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .btn-checkout {
+    font-weight: 500;
+    color: rgb(251, 251, 247);
+    background-color: rgb(17, 17, 17);
+    border-radius: 50px;
+    padding: 12px;
+    min-width: 150px;
+  }
+
+  .remove-item {
+    font-weight: 500;
+    color: rgb(17, 17, 17);
+    background-color: rgb(251, 251, 247);
+    border-radius: 50px;
+    border: solid 1px rgb(17, 17, 17);
+    padding: 12px;
+    min-width: 150px;
+  }
+
   
-  .carousel-header h2 {
-    font-size: 24px;
-    font-weight: 700;
-}
 
 
 
+  /* footer */
 
-/* footer */
-
-footer {
+  footer {
     background-color: rgb(17, 17, 17);
     color: rgb(251, 251, 247);
     padding: 24px;
