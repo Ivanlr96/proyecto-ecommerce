@@ -195,18 +195,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
 //Dropdown y botón
 document.addEventListener('DOMContentLoaded', () => {
     const customSelect = document.getElementById('customSelect');

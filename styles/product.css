@@ -15,11 +15,13 @@ h2 {
 h3 {
     font-weight: 500;
     margin-left: 24px;
+    margin-bottom: -12px;
 }
 
 h4 {
     font-weight: 500;
     margin-left: 24px;
+    margin-bottom: 20px;
 }
 
 p {
