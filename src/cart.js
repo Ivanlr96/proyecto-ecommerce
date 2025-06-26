@@ -6,10 +6,21 @@ function renderCart() {
     const totalAmount = document.getElementById('total-amount');
     const cartCount = document.getElementById('cart-count');
 
+    const cartMessage = document.getElementById('cart-message');
+    const summary = document.querySelector('.cart-summary');
+    const totalBlock = document.querySelector('.amount');
+    const body = document.body;
+
     if (cart.length === 0) {
         cartItems.innerHTML = "<p>Tu carrito está vacío.</p>";
         totalAmount.textContent = "0€";
         if (cartCount) cartCount.textContent = "0";
+
+        cartMessage?.classList.add('hidden');
+        summary?.classList.add('hidden');
+        totalBlock?.classList.add('hidden');
+
+        body.classList.remove('active-cart');
         return;
     }
 
