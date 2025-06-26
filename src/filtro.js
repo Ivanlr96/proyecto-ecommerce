@@ -67,14 +67,15 @@ async function getProducts() {
         html += `
         <article class="product-card">
             <div class="product-image">
+            <a href="product.html?id=${product.id}" class="product-link">
                 <img src="${product.image}" alt="${product.name}">
+                </a>
                 <button class="add-to-cart" aria-label="Add to Cart" data-id="${product.id}">
                     <i class="fa-solid fa-cart-plus"></i>
                 </button>
             </div>
             <div class="product-details">
-           <h4>
-                <a href="product.html?id=${product.id}" class="product-link">${product.name}</a>
+           <h4 class="product-link">${product.name}
             </h4>
                 <p class="price">${product.price}€</p>
             </div>
