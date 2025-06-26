@@ -35,9 +35,9 @@ function renderCart() {
         html += `
             <div class="cart-item">
                 <img src="${item.image}" alt="${item.name}" class="cart-image" width="50">
-                <span>${item.name}</span>
-                <span>${item.price}€</span>
-                <span>Cantidad: ${item.quantity}</span>
+                <span class="item-name">${item.name}</span>
+                <span class="item-price">${item.price}€</span>
+                <span class="item-quantity">Cantidad: ${item.quantity}</span>
                 <button class="remove-item" data-id="${item.id}">Eliminar</button>
             </div>
         `;
