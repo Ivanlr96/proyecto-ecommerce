@@ -60,10 +60,8 @@ label{
     justify-content: space-between;
     align-items: center;
     padding: 16px;
-    height: 70px;
+    height: 30px;
     position: relative;
-    margin-bottom: 32px;
-    z-index: 100;
 }
 
 .nav-left {
@@ -184,13 +182,13 @@ footer {
     background-color: rgb(17, 17, 17);
     color: rgb(251, 251, 247);
     padding: 24px;
-    position: fixed;
     bottom: 0;        /* Fija al fondo */
     left: 0;          /* Empieza desde el borde izquierdo */
     right: 0;         /* Se extiende hasta el borde derecho */
     width: 100%;      /* Ocupa todo el ancho */
     z-index: 1000;    /* Por encima de otros elementos */
-    box-sizing: border-box;     
+    box-sizing: border-box;  
+       
 }
 
 .mailing-footer {
@@ -302,6 +300,7 @@ footer {
     height: 100%;
     padding: 0;
     margin-bottom: 50px;
+    margin-top: 20px;
     
 }
 
