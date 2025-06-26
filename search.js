@@ -266,14 +266,13 @@ function displayResults(items) {
             ${productsToDisplay.map(item => `
                 <div class="product-card ${item.type}"> 
                     <div class="product-image">
-                        ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '📷'}
+                        ${item.image ? `<img class="img-search" src="${item.image}" alt="${item.name}">` : '📷'}
                     </div>
                     <div class="product-info">
                         <div class="product-name">${item.name}</div>
                         ${item.subCategoryName && item.type === 'product' ? `<div class="product-type">${item.subCategoryName}</div>` : ''}
                         ${item.categoryName && item.type === 'product' ? `<div class="product-category">${item.categoryName}</div>` : ''}
                         ${item.price && item.type === 'product' ? `<div class="product-price">${item.price}</div>` : ''} 
-                        ${item.description && item.type === 'product' ? `<div class="product-description">${item.description}</div>` : ''}
                     </div>
                 </div>
             `).join('')}
