@@ -450,3 +450,7 @@ nav {
   line-height: 1;
   margin-left: 4px;
 }
+
+a {
+    color: black;
+}
