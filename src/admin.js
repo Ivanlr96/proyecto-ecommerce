@@ -40,8 +40,17 @@ async function renderProducts() {
       const subcategory = category?.subcategories.find(sub => Number(sub.id) === Number(product.subcategoryId));
       const subcategoryName = subcategory ? subcategory.name : "Desconocida";
 
+
+      // 1. Crea una cadena de texto con todos los campos que quieres que sean buscables.
+      const searchableRowText = `${product.id} ${product.name} ${product.description || ''} ${categoryName} ${subcategoryName} ${product.price}`.toLowerCase();
+      // El || '' asegura que la descripción no sea 'undefined' si no existe.
+      
+
       // Crear el elemento tr (fila) para reenderizar en la tabla y lo asignamos a la variable row
       const row = document.createElement("tr");
+
+      // Asignamos la cadena de búsqueda a un atributo de datos en la fila.
+      row.setAttribute('data-search-text', searchableRowText);
 
       //Crear las celdas (td) dentro de la etiqueta de Tr de la variable donde guardamos el elemento. En cada td ponemos el contenido del objeto, que creará cada entrada de la bd en su celda correspondiente.
       row.innerHTML = `
@@ -395,14 +404,63 @@ renderProducts();
 
 
 
+/* Maneja la búsqueda en tiempo real.
+ * Oculta o muestra las filas de la tabla según la consulta.
+ */
+function handleAdminSearch() {
+  // Capturamos el campo de búsqueda
+  const adminSearchInput = document.getElementById('adminSearchInput');
+  if (!adminSearchInput) {
+    console.error("No se encontró el elemento con ID 'adminSearchInput'");
+    return; // Salir si el elemento no existe.
+  }
+  
+  // Obtiene el valor del campo de búsqueda y lo convierte a minúsculas.
+  const query = adminSearchInput.value.toLowerCase().trim();
+  
+  // Obtiene todas las filas del cuerpo de la tabla.
+  const rows = document.querySelectorAll("#products-table tbody tr");
+  
+  // Itera sobre cada fila para mostrarla u ocultarla.
+  rows.forEach(row => {
+    // Obtiene el texto de búsqueda de la fila del atributo data-search-text.
+    const rowSearchText = row.dataset.searchText || ''; // Usamos .dataset para acceder al atributo
+    
+    // Si el texto de la fila incluye la consulta, la muestra.
+    // Si la consulta está vacía, se muestran todas las filas.
+    if (rowSearchText.includes(query)) {
+      row.style.display = ''; // Muestra la fila
+    } else {
+      row.style.display = 'none'; // Oculta la fila
+    }
+  });
+}
+
+
+// *** CONECTAR EL BUSCADOR CON EL CAMPO DE ENTRADA ***
+
+// Asegúrate de que el DOM esté completamente cargado antes de añadir el event listener
+document.addEventListener("DOMContentLoaded", () => {
+    // Es mejor que esta función se llame después de que la tabla ya se haya renderizado.
+    // Tu llamada a renderProducts() ya está fuera, lo cual es correcto.
+    // Ahora, solo hay que conectar el evento.
+    
+    // Captura el input del buscador
+    const adminSearchInput = document.getElementById('adminSearchInput');
+    
+    // Añade el event listener para que la búsqueda sea en tiempo real con cada tecla
+    if (adminSearchInput) {
+      adminSearchInput.addEventListener('input', handleAdminSearch);
+    }
+});
 
 
 
 
 
 
-
-
+// Ejecutar al cargar
+renderProducts();
 
 
 
