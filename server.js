@@ -1,25 +1,23 @@
-const express = require("express");
 const jsonServer = require("json-server");
 const path = require("path");
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware para servir archivos estáticos desde la raíz (index.html, CSS, src/, etc.)
-app.use(express.static(__dirname));
-
-// JSON Server: sirve db.json sin prefijo /api
+const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, "server", "db.json"));
 const middlewares = jsonServer.defaults();
 
-app.use(middlewares);
-app.use(router);
+const PORT = process.env.PORT || 3000;
 
-// Fallback para SPA (por si hay rutas que no coinciden con archivos reales)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+server.use(middlewares);
+server.use(jsonServer.bodyParser);
+
+// CORS
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+server.use(router);
+server.listen(PORT, () => {
+  console.log(`JSON Server is running on port ${PORT}`);
 });
