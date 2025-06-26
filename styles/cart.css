@@ -1,4 +1,3 @@
-
 body {
     background-color: rgb(251, 251, 247);
     font-family: "Inter", sans-serif;
@@ -48,8 +47,9 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     padding: 16px;
-    height: 30px;
+    height: 70px;
     position: relative;
+    margin-bottom: 32px;
   }
   
   .nav-left {
@@ -94,6 +94,7 @@ button:hover {
     z-index: 9999;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
   }
   
   #side-menu.visible {
@@ -131,72 +132,7 @@ button:hover {
     font-weight: 600;
   }
   
-  /* Categorías */
-  .categories {
-    margin-top: 24px;
-    display: none;
-  }
-
-  .categories.active {
-    display: block;
-  }
-  
-  .categories ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .categories li {
-    margin-bottom: 12px;
-  }
-  
-  .categories a {
-    color: rgb(17, 17, 17);
-    text-decoration: none;
-    font-size: 18px;
-    transition: 0.2s;
-  }
-  
-  .categories a:hover {
-    text-decoration: none;
-    color:rgb(51, 51, 51);
-  }
-
-  /* Contenido */
-  .video-container-woman {
-    position: relative;
-    width: 100%;
-    height: 50vh;
-    overflow: hidden;
-  }
-  
-  .video-container-woman video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 480px;
-    object-fit: cover;
-    z-index: 1;
-  }
-
-  .video-container-man {
-    position: relative;
-    width: 100%;
-    height: 50vh;
-    overflow: hidden;
-  }
-  
-  .video-container-man video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 480px;
-    object-fit: cover;
-    z-index: 1;
-  }
+ 
 
   .text-content {
     position: absolute;
@@ -249,61 +185,7 @@ button:hover {
     font-weight: 700;
 }
 
-.cards-carousel {
-    display: flex;
-    flex-direction: row;
-    margin-left: 24px;
-    gap: 12px; 
-    overflow-x: auto;
-    padding: 0 24px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-}
 
-.card-category {
-  position: relative;
-  height: 355px;
-  width: 284px;
-  border-radius: 16px;  
-  overflow: hidden;
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  display:flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 20px;    
-}
-
-.photo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover; 
-  object-position: center;
-  z-index: 1;
-}
-
-.btn-category { 
-  position: relative;
-  z-index: 2;
-  background-color: rgb(17, 17, 17);
-  color:rgb(251, 251, 247);
-  border-radius: 50px;
-  border: none;
-  padding: 12px;
-  max-width: 350px;
-  min-width: 150px;
-  font-weight: 600;
-  font-size: 16px;
-  text-align: center;
-  }
-
-.btn-category:hover {
-    background-color:rgb(51, 51, 51);
-    color: rgb(251, 251, 247);
-}
 
 
 /* footer */
@@ -416,3 +298,16 @@ footer {
   .legal-links a:hover {
     color:rgb(51, 51, 51);
   }
+
+.fa-cart-shopping + span {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 999px;
+  display: inline-block;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1.2;
+}

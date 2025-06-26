@@ -82,12 +82,48 @@
 
         <main class="page-grid">
             <aside class="sidebar">
+                <section id="clear">
+                    <h2>FILTER & SORT</h2>
+                    <button class="clear-all">Clear All</button>
+                </section>
                 <section>
                     <h4>SORT BY</h4>
                     <div class="sort-options">
                         <label><input type="radio" name="sort" value="low-to-high"> Price: Low to High</label>
                         <label><input type="radio" name="sort" value="high-to-low"> Price: High to Low</label>
+                        <label><input type="radio" name="sort" value="relevance" checked> Relevancy</label>
+                        <label><input type="radio" name="sort" value="newest"> Newest</label>
                     </div>
+                </section>
+                <section>
+                    <h3>PRODUCT TYPE</h3>
+                    <select>
+                        <option value="">Select Product Type</option>
+                        <option value="t-shirts">T-Shirts</option>
+                        <option value="tanks">Tanks</option>
+                        <option value="long-sleeves">Long Sleeves</option>
+                    </select>
+                </section>
+                <section>
+                    <h3>SIZE</h3>
+                    <select>
+                        <option value="">Select Size</option>
+                        <option value="xs">XS</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                    </select>
+                </section>
+                <section>
+                    <h3>FEATURES</h3>
+                    <select>
+                        <option value="">Select Features</option>
+                        <option value="oversized">Oversized</option>
+                        <option value="graphic">Graphic</option>
+                        <option value="athleisure">Athleisure</option>
+                    </select>
+                </section>
             </aside>
 
             <main class="product-grid" id="product-cards-container">
