@@ -208,7 +208,7 @@ form.addEventListener("submit", async (e) => {
     categoryId,
     subcategoryId,
     description,
-    image: imageBase64 // Enviar como base64 o URL si usas Cloudinary
+    image: imageBase64 
   };
 
     try {

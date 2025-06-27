@@ -87,7 +87,7 @@ async function loadSubcategoriesMenu() {
             category.subcategories.forEach((subcat) => {
                 const li = document.createElement("li");
                 const link = document.createElement("a");
-                link.href = `/subcategories/${subcat.id}`;
+                link.href = `/subcategory.html?category=${category.name.toLowerCase()}&subcategory=${subcat.id}`;
                 link.textContent = subcat.name;
                 li.appendChild(link);
                 if (category.name.toLowerCase() === "mujer") {
