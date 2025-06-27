@@ -109,7 +109,7 @@ function updateCartCount() {
 document.addEventListener("DOMContentLoaded", updateCartCount);
 window.addEventListener("storage", updateCartCount);
 
-// Escucha los cambios en los radios de orden
+// Escucha los cambios 
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('input[name="sort"]').forEach(radio => {
         radio.addEventListener("change", (e) => {

@@ -198,11 +198,11 @@ footer {
     background-color: rgb(17, 17, 17);
     color: rgb(251, 251, 247);
     padding: 24px;
-    bottom: 0;        /* Fija al fondo */
-    left: 0;          /* Empieza desde el borde izquierdo */
-    right: 0;         /* Se extiende hasta el borde derecho */
-    width: 100%;      /* Ocupa todo el ancho */
-    z-index: 1000;    /* Por encima de otros elementos */
+    bottom: 0;        
+    left: 0;        
+    right: 0;        
+    width: 100%;    
+    z-index: 1000;    
     box-sizing: border-box; 
     margin-top: 40px;
        

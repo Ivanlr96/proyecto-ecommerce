@@ -44,7 +44,7 @@ async function renderProducts() {
       // 1. Crea una cadena de texto con todos los campos que quieres que sean buscables.
       const searchableRowText = `${product.id} ${product.name} ${product.description || ''} ${categoryName} ${subcategoryName} ${product.price}`.toLowerCase();
       // El || '' asegura que la descripción no sea 'undefined' si no existe.
-      
+
 
       // Crear el elemento tr (fila) para reenderizar en la tabla y lo asignamos a la variable row
       const row = document.createElement("tr");
@@ -208,10 +208,10 @@ form.addEventListener("submit", async (e) => {
     categoryId,
     subcategoryId,
     description,
-    image: imageBase64 
+    image: imageBase64
   };
 
-    try {
+  try {
     if (modoEdicion) {
       // Solo actualizar producto existente
       await fetch(`${API_URL}/${idEditando}`, {
@@ -257,83 +257,6 @@ function toBase64(file) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let modoEdicion = false;
 let idEditando = null;
 const titleForm = document.getElementById("titleForm");
@@ -344,7 +267,7 @@ async function cargarProductoEnFormulario(id) {
     const res = await fetch(`${API_URL}/${id}`);
     const product = await res.json();
 
-    id = product.id; 
+    id = product.id;
     document.getElementById("product-name").value = product.name;
     document.getElementById("product-price").value = product.price;
     document.getElementById("text").value = product.description;
@@ -371,21 +294,12 @@ async function cargarProductoEnFormulario(id) {
 }
 
 
-
-
-
-
-
-
-
-
-
 // DELETE
-   // Boton de Borrar
+// Boton de Borrar
 async function deleteProduct(id) {
   const confirmDelete = confirm("Estas seguro de querer eliminar este producto?");
   if (!confirmDelete) // Si le dan a cancelar
-     return; // Devuelve los datos 
+    return; // Devuelve los datos 
 
   try {
     await fetch(`${API_URL}/${id}`, { // Pide a la Api
@@ -414,18 +328,18 @@ function handleAdminSearch() {
     console.error("No se encontró el elemento con ID 'adminSearchInput'");
     return; // Salir si el elemento no existe.
   }
-  
+
   // Obtiene el valor del campo de búsqueda y lo convierte a minúsculas.
   const query = adminSearchInput.value.toLowerCase().trim();
-  
+
   // Obtiene todas las filas del cuerpo de la tabla.
   const rows = document.querySelectorAll("#products-table tbody tr");
-  
+
   // Itera sobre cada fila para mostrarla u ocultarla.
   rows.forEach(row => {
     // Obtiene el texto de búsqueda de la fila del atributo data-search-text.
     const rowSearchText = row.dataset.searchText || ''; // Usamos .dataset para acceder al atributo
-    
+
     // Si el texto de la fila incluye la consulta, la muestra.
     // Si la consulta está vacía, se muestran todas las filas.
     if (rowSearchText.includes(query)) {
@@ -441,45 +355,22 @@ function handleAdminSearch() {
 
 // Asegúrate de que el DOM esté completamente cargado antes de añadir el event listener
 document.addEventListener("DOMContentLoaded", () => {
-    // Es mejor que esta función se llame después de que la tabla ya se haya renderizado.
-    // Tu llamada a renderProducts() ya está fuera, lo cual es correcto.
-    // Ahora, solo hay que conectar el evento.
-    
-    // Captura el input del buscador
-    const adminSearchInput = document.getElementById('adminSearchInput');
-    
-    // Añade el event listener para que la búsqueda sea en tiempo real con cada tecla
-    if (adminSearchInput) {
-      adminSearchInput.addEventListener('input', handleAdminSearch);
-    }
+  // Es mejor que esta función se llame después de que la tabla ya se haya renderizado.
+  // Tu llamada a renderProducts() ya está fuera, lo cual es correcto.
+  // Ahora, solo hay que conectar el evento.
+
+  // Captura el input del buscador
+  const adminSearchInput = document.getElementById('adminSearchInput');
+
+  // Añade el event listener para que la búsqueda sea en tiempo real con cada tecla
+  if (adminSearchInput) {
+    adminSearchInput.addEventListener('input', handleAdminSearch);
+  }
 });
-
-
-
-
 
 
 // Ejecutar al cargar
 renderProducts();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -489,7 +380,7 @@ async function cargarProductoEnFormulario(id) {
     const res = await fetch(`${API_URL}/${id}`);
     const product = await res.json();
 
-   // document.getElementById("product-id").value = product.id; // Assuming you have an ID input field
+    // document.getElementById("product-id").value = product.id; // Assuming you have an ID input field
     id = product
     document.getElementById("product-name").value = product.name;
     document.getElementById("product-price").value = product.price;
@@ -516,21 +407,12 @@ async function cargarProductoEnFormulario(id) {
 }
 
 
-
-
-
-
-
-
-
-
-
 // DELETE
-   // Boton de Borrar
+// Boton de Borrar
 async function deleteProduct(id) {
   const confirmDelete = confirm("Estas seguro de querer eliminar este producto?");
   if (!confirmDelete) // Si le dan a cancelar
-     return; // Devuelve los datos 
+    return; // Devuelve los datos 
 
   try {
     await fetch(`${API_URL}/${id}`, { // Pide a la Api
