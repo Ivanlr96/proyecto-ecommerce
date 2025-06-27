@@ -114,6 +114,16 @@ function renderCart() {
     const totalAmount = document.getElementById('total-amount');
     const cartCount = document.getElementById('cart-count');
 
+        const btnCheckout = document.getElementById("btn-checkout");
+    if (btnCheckout) {
+        btnCheckout.onclick = () => {
+            localStorage.removeItem("cart");
+            updateCartCount();
+            alert("¡Gracias por tu compra!");
+             window.location.href = "index.html";
+        };
+    }
+
     // Mostrar/ocultar mensaje de carrito
     const cartMessage = document.getElementById('cart-message');
     const summary = document.querySelector('.cart-summary');
