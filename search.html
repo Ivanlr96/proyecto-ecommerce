@@ -7,53 +7,50 @@
     <title>Document</title>
     <link rel="stylesheet" href="search.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-       <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-        <nav class="main-nav">
-            <div class="header-actions">
+    <nav class="main-nav">
+        <div class="header-actions">
             <button class="search-trigger" onclick="openSearch()">
                 <i class="fas fa-search"></i>
             </button>
+        </div>
+
+        <!-- OVERLAY -->
+        <div class="search-overlay" onclick="closeSearch()"></div>
+
+        <!-- MODAL DE BÚSQUEDA -->
+        <div class="search-modal" id="searchModal">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="¿Qué estás buscando?" id="searchInput"
+                    oninput="handleSearch(this.value)">
+                <button class="close-search" onclick="closeSearch()">✕</button>
             </div>
 
-     <!-- OVERLAY -->
-    <div class="search-overlay" onclick="closeSearch()"></div>
-
-    <!-- MODAL DE BÚSQUEDA -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-container">
-            <input 
-                type="text" 
-                class="search-input" 
-                placeholder="¿Qué estás buscando?"
-                id="searchInput"
-                oninput="handleSearch(this.value)"
-            >
-            <button class="close-search" onclick="closeSearch()">✕</button>
-        </div>
-        
-        <div class="search-results" id="searchResults">
-            <div class="search-suggestions">
-                <div class="suggestions-title">Búsquedas populares</div>
-                <div class="suggestions-list">
-                    <span class="suggestion-tag" onclick="searchFor('chaquetas')">Chaquetas</span>
-                    <span class="suggestion-tag" onclick="searchFor('pantalones')">Pantalones</span>
-                    <span class="suggestion-tag" onclick="searchFor('camiseta')">Camiseta</span>
-                    <span class="suggestion-tag" onclick="searchFor('legging')">Legging</span>
-                    <span class="suggestion-tag" onclick="searchFor('sudaderas')">Sudaderas</span>
+            <div class="search-results" id="searchResults">
+                <div class="search-suggestions">
+                    <div class="suggestions-title">Búsquedas populares</div>
+                    <div class="suggestions-list">
+                        <span class="suggestion-tag" onclick="searchFor('chaquetas')">Chaquetas</span>
+                        <span class="suggestion-tag" onclick="searchFor('pantalones')">Pantalones</span>
+                        <span class="suggestion-tag" onclick="searchFor('camiseta')">Camiseta</span>
+                        <span class="suggestion-tag" onclick="searchFor('legging')">Legging</span>
+                        <span class="suggestion-tag" onclick="searchFor('sudaderas')">Sudaderas</span>
+                    </div>
                 </div>
-            </div>
-            
-            <div id="resultsContainer"></div>
-        </div>
-    </div>
 
-<script src="search.js"></script>
+                <div id="resultsContainer"></div>
+            </div>
+        </div>
+
+        <script src="search.js"></script>
 </body>
 
 </html>

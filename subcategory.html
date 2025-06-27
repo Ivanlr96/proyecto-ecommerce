@@ -11,7 +11,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+
     <link rel="stylesheet" href="/styles/subcategory.css">
+    <link rel="stylesheet" href="/styles/search.css">
+
     <title>SIROKO</title>
 </head>
 
@@ -22,9 +25,39 @@
                 <button id="menu-toggle" aria-label="abrir menú">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <button class="search" aria-label="buscador">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
+                 <div class="header-actions">
+            <button class="search-trigger" onclick="openSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <!-- OVERLAY -->
+        <div class="search-overlay" onclick="closeSearch()"></div>
+
+        <!-- MODAL DE BÚSQUEDA -->
+        <div class="search-modal" id="searchModal">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="¿Qué estás buscando?" id="searchInput"
+                    oninput="handleSearch(this.value)">
+                <button class="close-search" onclick="closeSearch()">✕</button>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-suggestions">
+                    <div class="suggestions-title">Búsquedas populares</div>
+                    <div class="suggestions-list">
+                        <span class="suggestion-tag" onclick="searchFor('chaquetas')">Chaquetas</span>
+                        <span class="suggestion-tag" onclick="searchFor('pantalones')">Pantalones</span>
+                        <span class="suggestion-tag" onclick="searchFor('camiseta')">Camiseta</span>
+                        <span class="suggestion-tag" onclick="searchFor('legging')">Legging</span>
+                        <span class="suggestion-tag" onclick="searchFor('sudaderas')">Sudaderas</span>
+                    </div>
+                </div>
+
+                <div id="resultsContainer"></div>
+            </div>
+        </div>
+
             </div>
 
             <div class="logo-container">
@@ -161,6 +194,9 @@
 </footer>
 
     <script src="./src/filtro.js"></script>
+    <script src="./src/search.js"></script>
+    
+
 </body>
 
 </html>

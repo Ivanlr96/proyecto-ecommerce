@@ -1,7 +1,7 @@
 
 
-const API_URL = "http://localhost:3000/products";
-const API_URL2 = "http://localhost:3000/categories";
+const API_URL3 = "http://localhost:3000/products";
+const API_URL4 = "http://localhost:3000/categories";
 
 // appData ahora se inicializa vacía o con una estructura mínima,
 // y sus contenidos serán llenados por las APIs.
@@ -23,7 +23,7 @@ async function initializeDataAndSearch() {
     try {
         // 1. Cargar categorías
         // ¿Por qué esta primera petición? Para obtener la estructura de categorías/subcategorías.
-        const categoriesResponse = await fetch(API_URL2);
+        const categoriesResponse = await fetch(API_URL4);
         if (!categoriesResponse.ok) {
             throw new Error(`Error al cargar categorías: ${categoriesResponse.status}`);
         }
@@ -32,7 +32,7 @@ async function initializeDataAndSearch() {
 
         // 2. Cargar productos
         // ¿Por qué esta segunda petición? Para obtener la lista de productos.
-        const productsResponse = await fetch(API_URL);
+        const productsResponse = await fetch(API_URL3);
         if (!productsResponse.ok) {
             throw new Error(`Error al cargar productos: ${productsResponse.status}`);
         }
@@ -123,7 +123,7 @@ function prepareSearchableItems() {
 async function addNewProductFromForm(newProductData) {
     try {
         console.log("Intentando añadir producto:", newProductData);
-        const response = await fetch(API_URL, {
+        const response = await fetch(API_URL3, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -266,9 +266,9 @@ function displayResults(items) {
     resultsContainer.innerHTML = `
         <div class="search-results-grid">
             ${productsToDisplay.map(item => `
-                <div class="product-card ${item.type}"> 
+                <div class="search-card ${item.type}"> 
                 <a href="product.html?id=${item.id}" class="product-link">${item.name}
-                    <div class="product-image">
+                    <div class="search-image">
                         ${item.image ? `<img class="img-search" src="${item.image}" alt="${item.name}">` : '📷'}
                     </div>
                     </a>
