@@ -201,7 +201,7 @@ function addToCart(product) {
         cart.push({ ...product, quantity: 1 });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount(); // <-- Añade esta línea
+    updateCartCount(); 
     alert('Producto añadido al carrito');
 }
 }
