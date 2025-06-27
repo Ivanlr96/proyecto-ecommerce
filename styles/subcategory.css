@@ -1,17 +1,29 @@
- 
+ html, body {
+    height: 100%;
+}
 
 body {
      background-color: rgb(251, 251, 247);
     font-family: "Inter", sans-serif;
     color: rgb(17, 17, 17);
     margin: 0;
-    padding: 0; /* Quitamos el padding del body */
+    padding: 0;
+       min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     
     
 }
 
 .main-content {
-    padding: 0 2rem; /* Movemos el padding aquí */
+    flex: 1 0 auto;
+}
+
+
+
+
+.main-content {
+    padding: 0 2rem; 
 }
 
 button {
@@ -191,7 +203,8 @@ footer {
     right: 0;         /* Se extiende hasta el borde derecho */
     width: 100%;      /* Ocupa todo el ancho */
     z-index: 1000;    /* Por encima de otros elementos */
-    box-sizing: border-box;  
+    box-sizing: border-box; 
+    margin-top: 40px;
        
 }
 
